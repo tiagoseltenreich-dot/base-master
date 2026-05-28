@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evolua — Sistema Integrado</title>
+<title>Base Master — Sistema Integrado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
@@ -11,7 +11,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#06090F;--navy2:#0D1420;--navy3:#141E30;
-  --gold:#D4A033;--gold2:#F0C060;
+  --gold:#2563EB;--gold2:#3B82F6;
   --text:#E8EAF0;--text2:#8A9AB8;--text3:#5A6A88;
   --border:#1E2A40;--border2:#2A3A58;
   --card:#0D1420;--card2:#111827;
@@ -289,8 +289,8 @@ select:focus{outline:none;border-color:var(--gold)}
   <div class="login-box">
     <div class="login-logo">
       <div class="login-dot">TS</div>
-      <div class="login-title">Evolua</div>
-      <div class="login-sub">Sistema Integrado de Prospecção</div>
+      <div class="login-title">Base Master</div>
+      <div class="login-sub">Base Master — Sistema Integrado</div>
     </div>
     <div class="login-field"><label>Usuário</label><input type="text" id="loginUser" placeholder="seu usuário" autocomplete="username"></div>
     <div class="login-field"><label>Senha</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
@@ -305,7 +305,7 @@ select:focus{outline:none;border-color:var(--gold)}
 <div class="sidebar" id="appSidebar" style="display:none">
   <div class="sb-brand">
     <div class="sb-dot">TS</div>
-    <div><div class="sb-name">Evolua</div><div class="sb-sub">Sistema Integrado</div></div>
+    <div><div class="sb-name">Base Master</div><div class="sb-sub">Base Master</div></div>
   </div>
   <div class="sb-nav">
     <div class="sb-section">Principal</div>
@@ -563,19 +563,22 @@ select:focus{outline:none;border-color:var(--gold)}
 
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE -->
+<!-- FIREBASE BASE MASTER -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-const _fk=['AIzaSyB0','YuBSZjXJ','gLhfuDgA','W2ftbucB','ectRfEw'].join('');
+
+// BASE MASTER — banco próprio, independente do Evolua
+const _mk=['AIzaSyAdP','zZINXMLDC','wie6qv7pe','tRGf04sM','RIuw'].join('');
 const db = getFirestore(initializeApp({
-  apiKey:_fk,
-  authDomain:"evoluaimobnegocios.firebaseapp.com",
-  projectId:"evoluaimobnegocios",
-  storageBucket:"evoluaimobnegocios.firebasestorage.app",
-  messagingSenderId:"656106002738",
-  appId:"1:656106002738:web:b2d9467209beb5659a9f2b"
+  apiKey:_mk,
+  authDomain:"base-master-51391.firebaseapp.com",
+  projectId:"base-master-51391",
+  storageBucket:"base-master-51391.firebasestorage.app",
+  messagingSenderId:"236716794489",
+  appId:"1:236716794489:web:7975f64d63d276c0766aa8"
 }));
+
 window._leads=[];window._tasks=[];window._clientes=[];window._usuarios=[];
 window._editingId=null;window._editingClienteId=null;
 window.STAGES=[
@@ -589,6 +592,8 @@ window.STAGES=[
 window.SEG_L={P:'Pequena',M:'Média',G:'Grande',EG:'Muito grande','?':''};
 window.SEG_T={P:'tp',M:'tm',G:'tg',EG:'teg'};
 window.EST_T={RS:'trs',SC:'tsc',PR:'tpr',RJ:'trj',SP:'tsp',MG:'tmg'};
+
+// Escrita APENAS no banco Master — nunca sincroniza de volta para o Evolua
 window.saveLead=async l=>setDoc(doc(db,'leads',String(l.id)),l);
 window.delLead=async id=>deleteDoc(doc(db,'leads',String(id)));
 window.saveTask=async t=>setDoc(doc(db,'tasks',String(t.id)),t);
