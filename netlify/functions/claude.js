@@ -35,8 +35,22 @@ exports.handler = async function(event) {
     });
 
     const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        headers,
+        body: JSON.stringify({ error: data.error?.message || 'Erro na API' })
+      };
+    }
+
     return { statusCode: 200, headers, body: JSON.stringify(data) };
+
   } catch (err) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: err.message }) };
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: err.message })
+    };
   }
 };
