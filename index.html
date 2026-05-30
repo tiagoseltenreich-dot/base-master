@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evolua — Sistema Integrado</title>
+<title>Base Master — Sistema Integrado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
@@ -174,77 +174,43 @@ select:focus{outline:none;border-color:var(--gold)}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--navy)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-
-/* ============================
-   PAINEL DE EXECUÇÃO DIÁRIA
-   ============================ */
-.exec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.exec-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
-.exec-kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;text-align:center}
-.exec-kpi-n{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1}
-.exec-kpi-l{font-size:11px;color:var(--text2);margin-top:3px}
-.exec-kpi.urgente{border-color:rgba(224,96,48,.4);background:rgba(224,96,48,.04)}
-.exec-kpi.urgente .exec-kpi-n{color:#F08050}
-.exec-kpi.ok .exec-kpi-n{color:var(--success)}
-.exec-kpi.hist .exec-kpi-n{color:var(--text2)}
-.exec-tabs{display:flex;gap:6px;margin-bottom:16px}
-.exec-tab{padding:7px 16px;border-radius:var(--r);border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:13px;font-family:'Barlow',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px}
-.exec-tab:hover{background:var(--navy3);color:var(--text)}
-.exec-tab.active{background:#E06030;color:#fff;border-color:#E06030}
-.exec-tab .tab-count{font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.2);font-weight:700}
-.exec-list{display:flex;flex-direction:column;gap:8px}
-.exec-item{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);overflow:hidden}
-.exec-item.pendente{border-left:3px solid #E06030}
-.exec-item.feito{border-left:3px solid var(--success);opacity:.65}
-.exec-item-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer}
-.exec-tipo-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.exec-tipo-wa{background:rgba(37,211,102,.12);color:#25D366;border:1px solid rgba(37,211,102,.2)}
-.exec-tipo-email{background:rgba(212,160,51,.12);color:#D4A033;border:1px solid rgba(212,160,51,.2)}
-.exec-tipo-ligacao{background:rgba(55,138,221,.12);color:var(--info);border:1px solid rgba(55,138,221,.2)}
-.exec-tipo-followup{background:rgba(123,94,167,.12);color:var(--ai2);border:1px solid rgba(123,94,167,.2)}
-.exec-item-info{flex:1}
-.exec-item-nome{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
-.exec-item-sub{font-size:11px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.exec-item-status{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.exec-dia-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--navy3);border:1px solid var(--border2);color:var(--text2);font-weight:600}
-.exec-pend-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(224,96,48,.15);border:1px solid rgba(224,96,48,.3);color:#F08050;font-weight:600}
-.exec-feito-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(29,158,117,.15);border:1px solid rgba(29,158,117,.3);color:var(--success);font-weight:600}
-.exec-item-body{padding:0 16px 14px;border-top:1px solid var(--border);display:none}
-.exec-item-body.open{display:block;margin-top:12px}
-.exec-msg-preview{background:var(--navy3);border:1px solid var(--border);border-radius:var(--r);padding:12px;font-size:12px;color:var(--text2);line-height:1.6;white-space:pre-line;max-height:120px;overflow-y:auto;margin-bottom:10px}
-.exec-actions{display:flex;gap:6px;flex-wrap:wrap}
-.exec-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--r);border:none;cursor:pointer;font-size:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.03em}
-.exec-btn-wa{background:#25D366;color:#fff}
-.exec-btn-email{background:#D4A033;color:#06090F}
-.exec-btn-ligacao{background:var(--info);color:#fff}
-.exec-btn-copy{background:var(--navy3);border:1px solid var(--border2);color:var(--text)}
-.exec-btn-done{background:var(--success);color:#fff}
-.exec-btn-skip{background:transparent;border:1px solid var(--border2);color:var(--text3)}
-.exec-btn-skip:hover{border-color:#E06030;color:#F08050}
-.card.exec-pendente{border-left:3px solid #E06030!important}
-.texec{background:rgba(224,96,48,.15);color:#F08050;border:1px solid rgba(224,96,48,.25)}
-.hist-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.hist-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.sb-badge{position:absolute;right:10px;background:#E06030;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;font-family:'Barlow Condensed',sans-serif}
-.exec-empty{text-align:center;padding:48px 20px;color:var(--text3)}
-.exec-empty i{font-size:48px;display:block;margin-bottom:12px;opacity:.2}
-.exec-empty h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;color:var(--text2);margin-bottom:6px}
 </style>
 </head>
 <body>
 
-<div class="loading" id="loading">
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap" style="position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:500">
+  <div style="background:var(--card2);border:1px solid var(--border2);border-radius:16px;padding:36px;width:100%;max-width:360px">
+    <div style="text-align:center;margin-bottom:28px">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#3B82F6);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:10px">TS</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text)">Base Master</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px">Sistema Integrado</div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Usuário</label>
+      <input type="text" id="loginUser" placeholder="seu usuário" autocomplete="username" style="width:100%;padding:10px 12px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Barlow',sans-serif">
+    </div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Senha</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding:10px 12px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Barlow',sans-serif">
+    </div>
+    <button onclick="doLogin()" style="width:100%;padding:11px;background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;margin-top:4px">Entrar</button>
+    <div id="loginErr" style="font-size:12px;color:#E24B4A;text-align:center;margin-top:8px;min-height:16px"></div>
+  </div>
+</div>
+
+<div class="loading" id="loading" style="display:none">
   <div class="spinner"></div>
   <p>Conectando...</p>
 </div>
 
 <!-- SIDEBAR -->
-<div class="sidebar">
+<div class="sidebar" id="appSidebar" style="display:none">
   <div class="sb-brand">
     <div class="sb-dot">TS</div>
     <div>
-      <div class="sb-name">Evolua</div>
-      <div class="sb-sub">Sistema Integrado</div>
+      <div class="sb-name">Base Master</div>
+      <div class="sb-sub">Base Master</div>
     </div>
   </div>
   <div class="sb-nav">
@@ -253,20 +219,16 @@ select:focus{outline:none;border-color:var(--gold)}
     <div class="sb-item" onclick="nav('pipeline',this)"><i class="ti ti-layout-kanban"></i> Pipeline SDR</div>
     <div class="sb-item" onclick="nav('agenda',this)"><i class="ti ti-calendar-check"></i> Agenda de Follow-up</div>
     <div class="sb-item" onclick="nav('cadencia',this)"><i class="ti ti-messages"></i> Cadência de Abordagem</div>
-        <div class="sb-item" onclick="nav('execucao',this)" id="sbExecucao" style="color:#F08050;position:relative">
-      <i class="ti ti-player-play"></i> Painel de Execução
-      <span class="sb-badge" id="sbExecBadge" style="display:none">0</span>
-    </div>
     <div class="sb-section" style="margin-top:12px">Gestão</div>
     <div class="sb-item" onclick="nav('clientes',this)"><i class="ti ti-building"></i> Clientes Ativos</div>
   </div>
   <div class="sb-bottom">
-    <div class="sb-status" id="sstatus">Conectando...</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;color:var(--text2)">Tiago Seltenreich</span><span onclick="doLogout()" style="font-size:11px;color:var(--text3);cursor:pointer;text-decoration:underline">Sair</span></div><div class="sb-status" id="sstatus">Conectando...</div>
   </div>
 </div>
 
 <!-- MAIN -->
-<div class="main-wrap">
+<div class="main-wrap" id="appMain" style="display:none">
   <div class="topbar">
     <div class="topbar-title" id="topbarTitle">Dashboard</div>
     <div class="topbar-actions" id="topbarActions"></div>
@@ -303,47 +265,6 @@ select:focus{outline:none;border-color:var(--gold)}
     </div>
 
     <!-- AGENDA -->
-    
-    <div class="page" id="page-execucao">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:var(--text)"><i class="ti ti-player-play" style="color:#F08050;margin-right:6px"></i> Painel de Execução Diária</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:2px" id="execSubtitle">Carregando...</div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn" onclick="nav('historico',null)"><i class="ti ti-history"></i> Histórico</button>
-          <button class="btn" style="background:linear-gradient(135deg,#E06030,#F08050);color:#fff;border-color:transparent;font-weight:600" onclick="gerarExecucaoIA()"><i class="ti ti-sparkles"></i> Gerar tarefas com IA</button>
-        </div>
-      </div>
-      <div class="exec-kpis" id="execKpis"></div>
-      <div class="exec-tabs">
-        <button class="exec-tab active" id="tabPendente" onclick="filtrarExec('pendente',this)"><i class="ti ti-clock"></i> Pendentes <span class="tab-count" id="cntPendente">0</span></button>
-        <button class="exec-tab" id="tabFeito" onclick="filtrarExec('feito',this)"><i class="ti ti-check"></i> Concluídos <span class="tab-count" id="cntFeito">0</span></button>
-        <button class="exec-tab" id="tabTodos" onclick="filtrarExec('todos',this)"><i class="ti ti-list"></i> Todos <span class="tab-count" id="cntTodos">0</span></button>
-      </div>
-      <div class="exec-list" id="execList"></div>
-    </div>
-
-    <div class="page" id="page-historico">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text)"><i class="ti ti-history" style="color:var(--text3);margin-right:6px"></i> Histórico de Execução</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:2px">Todas as ações executadas</div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <select id="histFiltroTipo" onchange="renderHistorico()" style="font-size:12px;padding:6px 8px">
-            <option value="">Todos os tipos</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="email">E-mail</option>
-            <option value="ligacao">Ligação</option>
-            <option value="followup">Follow-up</option>
-          </select>
-          <button class="btn bsm" onclick="nav('execucao',document.getElementById('sbExecucao'))"><i class="ti ti-arrow-left"></i> Voltar</button>
-        </div>
-      </div>
-      <div id="historicoContent"></div>
-    </div>
-
     <div class="page" id="page-agenda">
       <div id="agendaContent"></div>
     </div>
@@ -456,20 +377,6 @@ select:focus{outline:none;border-color:var(--gold)}
   </div>
 </div>
 
-
-<!-- MODAL EXECUÇÃO -->
-<div class="moverlay" id="execModal"><div class="mbox">
-  <h3 id="execModalTitle">Adicionar ao Painel</h3>
-  <div style="font-size:12px;color:var(--text3);margin-bottom:16px" id="execModalSub">Escolha o canal de execução</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px">
-    <button class="exec-btn exec-btn-wa" style="justify-content:center;padding:14px;border-radius:var(--r)" id="ebWa" onclick="addExecManual('whatsapp')"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
-    <button class="exec-btn exec-btn-email" style="justify-content:center;padding:14px;border-radius:var(--r)" id="ebEm" onclick="addExecManual('email')"><i class="ti ti-mail"></i> E-mail</button>
-    <button class="exec-btn exec-btn-ligacao" style="justify-content:center;padding:14px;border-radius:var(--r)" id="ebLi" onclick="addExecManual('ligacao')"><i class="ti ti-phone"></i> Ligação</button>
-    <button class="exec-btn exec-btn-copy" style="justify-content:center;padding:14px;border-radius:var(--r)" id="ebFu" onclick="addExecManual('followup')"><i class="ti ti-repeat"></i> Follow-up</button>
-  </div>
-  <div class="mactions"><button class="btn bsm" onclick="closeModal('execModal')">Cancelar</button></div>
-</div></div>
-
 <div class="toast" id="toast"></div>
 
 <!-- FIREBASE -->
@@ -478,12 +385,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB0YuBSZjXJgLhfuDgAW2ftbucBectRfEw",
-  authDomain: "evoluaimobnegocios.firebaseapp.com",
-  projectId: "evoluaimobnegocios",
-  storageBucket: "evoluaimobnegocios.firebasestorage.app",
-  messagingSenderId: "656106002738",
-  appId: "1:656106002738:web:b2d9467209beb5659a9f2b"
+  apiKey: "AIzaSyAdPzZINXMLDCwie6qv7petRGf04sMRIuw",
+  authDomain: "base-master-51391.firebaseapp.com",
+  projectId: "base-master-51391",
+  storageBucket: "base-master-51391.firebasestorage.app",
+  messagingSenderId: "236716794489",
+  appId: "1:236716794489:web:7975f64d63d276c0766aa8"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -528,6 +435,21 @@ onSnapshot(collection(db,'leads'),(snap)=>{
 });
 onSnapshot(collection(db,'tasks'),(snap)=>{ window._tasks=snap.docs.map(d=>d.data()); renderAgenda(); });
 onSnapshot(collection(db,'clientes'),(snap)=>{ window._clientes=snap.docs.map(d=>d.data()); renderClientes(); });
+
+// EXEC listeners
+window._execTarefasDB = [];
+window._execHistoricoDB = [];
+window.saveExecTarefa = async t => setDoc(doc(db,'exec_tarefas',String(t.id)),t);
+window.saveExecHistorico = async h => setDoc(doc(db,'exec_historico',String(h.id)),h);
+onSnapshot(collection(db,'exec_tarefas'),(snap)=>{
+  window._execTarefas=snap.docs.map(d=>d.data());
+  atualizarBadgeExec&&atualizarBadgeExec();
+  if(typeof renderExecucao==='function')renderExecucao();
+});
+onSnapshot(collection(db,'exec_historico'),(snap)=>{
+  window._execHistorico=snap.docs.map(d=>d.data());
+  if(typeof renderHistorico==='function')renderHistorico();
+});
 </script>
 
 <script>
@@ -546,14 +468,16 @@ function nav(page, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  el.classList.add('active');
-  const titles={dashboard:'Dashboard',pipeline:'Pipeline SDR',agenda:'Agenda de Follow-up',cadencia:'Cadência de Abordagem',clientes:'Clientes Ativos'};
+  if(el)el.classList.add('active');
+  const titles={dashboard:'Dashboard',pipeline:'Pipeline SDR',agenda:'Agenda de Follow-up',cadencia:'Cadência de Abordagem',clientes:'Clientes Ativos',execucao:'Painel de Execução Diária',historico:'Histórico de Execução'};
   document.getElementById('topbarTitle').textContent=titles[page]||page;
   renderTopbarActions(page);
   if(page==='dashboard')renderDashboard();
   if(page==='pipeline')renderPipeline();
   if(page==='agenda')renderAgenda();
   if(page==='clientes')renderClientes();
+  if(page==='execucao')renderExecucao();
+  if(page==='historico')renderHistorico();
 }
 
 function renderTopbarActions(page){
@@ -635,7 +559,6 @@ function renderPipeline(){
         <div class="cbtns">
           ${si>0?`<button class="btn bsm" onclick="moveCard('${l.id}',-1,event)">← Voltar</button>`:''}
           ${si<stages.length-1?`<button class="btn bsm" onclick="moveCard('${l.id}',1,event)">Avançar →</button>`:''}
-          <button class="btn bsm" onclick="abrirMenuExec('${l.id}',event)" title="Painel de execução" style="color:#F08050;border-color:rgba(224,96,48,.3)"><i class="ti ti-player-play"></i></button>
           <button class="btn bsm bdanger" onclick="delCard('${l.id}',event)"><i class="ti ti-trash"></i></button>
         </div>
       </div>`;
@@ -840,239 +763,55 @@ async function deleteCliente(){
   closeModal('newClienteModal');toast('Removido');
 }
 
-
-// =============================================
-// PAINEL DE EXECUÇÃO DIÁRIA
-// =============================================
-window._execTarefas=[];window._execHistorico=[];
-window._execFiltro='pendente';window._execLeadId=null;
-
-const EXEC_TIPOS={
-  whatsapp:{label:'WhatsApp',icon:'ti-brand-whatsapp',cls:'exec-tipo-wa',cor:'#25D366'},
-  email:{label:'E-mail',icon:'ti-mail',cls:'exec-tipo-email',cor:'#D4A033'},
-  ligacao:{label:'Ligação',icon:'ti-phone',cls:'exec-tipo-ligacao',cor:'var(--info)'},
-  followup:{label:'Follow-up',icon:'ti-repeat',cls:'exec-tipo-followup',cor:'var(--ai2)'},
-};
-
-function hoje(){return new Date().toISOString().split('T')[0];}
-
-// Listeners Firebase para exec_tarefas e exec_historico
-// São adicionados no módulo Firebase existente via patch abaixo
-
-function atualizarBadgeExec(){
-  const hj=hoje();
-  const pend=(window._execTarefas||[]).filter(t=>t.data<=hj&&t.status==='pendente').length;
-  const b=document.getElementById('sbExecBadge');
-  if(b){b.textContent=pend;b.style.display=pend>0?'inline-flex':'none';}
-}
-
-function renderExecucao(){
-  const hj=hoje();
-  const tarefas=window._execTarefas||[];
-  const dHoje=tarefas.filter(t=>t.data===hj);
-  const pendentes=dHoje.filter(t=>t.status==='pendente');
-  const feitos=dHoje.filter(t=>t.status==='feito');
-  const atrasadas=tarefas.filter(t=>t.data<hj&&t.status==='pendente');
-
-  const sub=document.getElementById('execSubtitle');
-  if(sub){
-    const dt=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
-    sub.textContent=dt+' · '+pendentes.length+' pendentes · '+atrasadas.length+' atrasadas';
+// LOGIN
+function doLogin(){
+  const user=document.getElementById('loginUser').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const err=document.getElementById('loginErr');
+  if(!user||!pass){err.textContent='Preencha usuário e senha';return;}
+  const USERS=[{user:'tiagoseltenreich',pass:'$1980Tiagus$',nome:'Tiago Seltenreich'}];
+  const found=USERS.find(u=>u.user===user&&u.pass===pass);
+  if(found){
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('appSidebar').style.display='flex';
+    document.getElementById('appMain').style.display='flex';
+    err.textContent='';
+    renderDashboard();renderPipeline();renderAgenda();renderClientes();
+    setTimeout(()=>atualizarBadgeExec&&atualizarBadgeExec(),500);
+  } else {
+    err.textContent='Usuário ou senha incorretos';
+    document.getElementById('loginPass').value='';
   }
-
-  const kEl=document.getElementById('execKpis');
-  if(kEl) kEl.innerHTML=
-    '<div class="exec-kpi urgente"><div class="exec-kpi-n">'+(pendentes.length+atrasadas.length)+'</div><div class="exec-kpi-l">Pendentes hoje</div></div>'+
-    '<div class="exec-kpi urgente"><div class="exec-kpi-n">'+atrasadas.length+'</div><div class="exec-kpi-l">Atrasadas</div></div>'+
-    '<div class="exec-kpi ok"><div class="exec-kpi-n">'+feitos.length+'</div><div class="exec-kpi-l">Concluídas hoje</div></div>'+
-    '<div class="exec-kpi hist"><div class="exec-kpi-n">'+((window._execHistorico||[]).length)+'</div><div class="exec-kpi-l">Total histórico</div></div>';
-
-  const todos=[...atrasadas,...pendentes,...feitos];
-  document.getElementById('cntPendente').textContent=pendentes.length+atrasadas.length;
-  document.getElementById('cntFeito').textContent=feitos.length;
-  document.getElementById('cntTodos').textContent=todos.length;
-
-  let lista=[];
-  if(window._execFiltro==='pendente') lista=[...atrasadas,...pendentes];
-  else if(window._execFiltro==='feito') lista=feitos;
-  else lista=todos;
-
-  const listEl=document.getElementById('execList');
-  if(!listEl)return;
-
-  if(!lista.length){
-    listEl.innerHTML='<div class="exec-empty"><i class="ti '+(window._execFiltro==='feito'?'ti-trophy':'ti-player-play')+'"></i><h3>'+(window._execFiltro==='feito'?'Nenhuma ação concluída':'Tudo limpo!')+'</h3><p>'+(window._execFiltro==='feito'?'Execute ações para vê-las aqui.':'Nenhuma tarefa pendente. Clique em "Gerar tarefas com IA".')+'</p></div>';
-    return;
-  }
-
-  listEl.innerHTML=lista.map(t=>{
-    const cfg=EXEC_TIPOS[t.tipo]||EXEC_TIPOS.followup;
-    const atrasada=t.data<hj&&t.status==='pendente';
-    const lead=(window._leads||[]).find(l=>l.id===t.leadId);
-    return '<div class="exec-item '+t.status+'" id="execItem_'+t.id+'">'+
-      '<div class="exec-item-header" onclick="toggleExecItem(''+t.id+'')">'+
-        '<div class="exec-tipo-icon '+cfg.cls+'"><i class="ti '+cfg.icon+'"></i></div>'+
-        '<div class="exec-item-info">'+
-          '<div class="exec-item-nome">'+esc(t.leadNome||'—')+'</div>'+
-          '<div class="exec-item-sub">'+
-            '<span><i class="ti '+cfg.icon+'" style="font-size:10px"></i> '+cfg.label+'</span>'+
-            (t.diaCadencia?'<span>· Dia '+t.diaCadencia+' da cadência</span>':'')+
-            (lead&&lead.cidade?'<span>· '+esc(lead.cidade)+'</span>':'')+
-            (atrasada?'<span style="color:#F08050">· Atrasada</span>':'')+
-          '</div>'+
-        '</div>'+
-        '<div class="exec-item-status">'+
-          (t.status==='pendente'?'<span class="exec-pend-badge">'+(atrasada?'⚠ Atrasada':'⏳ Pendente')+'</span>':'')+
-          (t.status==='feito'?'<span class="exec-feito-badge">✓ Feito</span>':'')+
-          '<span class="exec-dia-badge">'+t.data+'</span>'+
-        '</div>'+
-      '</div>'+
-      '<div class="exec-item-body" id="execBody_'+t.id+'">'+
-        (t.texto?'<div class="exec-msg-preview">'+esc(t.texto)+'</div>':'')+
-        '<div class="exec-actions">'+
-          (t.tipo==='whatsapp'?'<button class="exec-btn exec-btn-wa" onclick="abrirWA(''+t.id+'')"><i class="ti ti-brand-whatsapp"></i> Abrir WhatsApp</button>':'')+
-          (t.tipo==='email'?'<button class="exec-btn exec-btn-email" onclick="abrirEmail(''+t.id+'')"><i class="ti ti-mail"></i> Abrir E-mail</button>':'')+
-          (t.tipo==='ligacao'?'<button class="exec-btn exec-btn-ligacao" onclick="abrirLigacao(''+t.id+'')"><i class="ti ti-phone"></i> Ligar</button>':'')+
-          '<button class="exec-btn exec-btn-copy" onclick="copiarMsgExec(''+t.id+'')"><i class="ti ti-copy"></i> Copiar texto</button>'+
-          (t.status==='pendente'?'<button class="exec-btn exec-btn-done" onclick="marcarFeito(''+t.id+'')"><i class="ti ti-check"></i> Marcar feito</button>':'')+
-          '<button class="exec-btn exec-btn-skip" onclick="pularExec(''+t.id+'')">'+
-            (t.status==='feito'?'<i class="ti ti-x"></i> Desfazer':'<i class="ti ti-player-skip-forward"></i> Pular')+
-          '</button>'+
-          (lead?'<button class="btn bsm" onclick="openEdit(''+lead.id+'')"><i class="ti ti-pencil"></i> Editar lead</button>':'')+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  }).join('');
 }
 
-function toggleExecItem(id){
-  const b=document.getElementById('execBody_'+id);
-  if(b)b.classList.toggle('open');
+function doLogout(){
+  document.getElementById('loginWrap').style.display='flex';
+  document.getElementById('appSidebar').style.display='none';
+  document.getElementById('appMain').style.display='none';
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
 }
 
-function filtrarExec(f,btn){
-  window._execFiltro=f;
-  document.querySelectorAll('.exec-tab').forEach(t=>t.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  renderExecucao();
-}
+// CADÊNCIA PADRÃO (necessária para gerarExecucaoIA)
+const CADENCIA_PADRAO=[
+  {dia:1,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'Oi {nome}, tudo bem? Sou o Tiago Seltenreich, consultor de gestão para imobiliárias. Pergunta rápida: quantos imóveis você tem parados na carteira hoje sem alugar?\n\nSe quiser bater um papo rápido sobre isso, é só falar.',ativo:true},
+  {dia:3,canal:'email',fase:'Despertar',assunto:'Imóvel parado é dinheiro que você já perdeu',msg:'{nome},\n\nToda imobiliária tem aquele imóvel que tá na carteira faz 3, 4 meses e não aluga. O problema quase nunca é o imóvel. É o processo de visita que tá quebrado.\n\nVocê sabe quantas visitas sua equipe faz por semana? E quantas viram contrato?\n\nAté mais,\nTiago Seltenreich',ativo:true},
+  {dia:6,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'{nome}, te mandei um e-mail sobre visitas que não viram contrato. A maioria das imobiliárias perde entre 60% e 70% dos interessados nessa etapa.\n\nIsso acontece aí também?\n\nDá uma olhada: {site}',ativo:true},
+  {dia:10,canal:'email',fase:'Despertar',assunto:'Checklist gratuito: por que seu imóvel não está alugando',msg:'{nome},\n\nPreparei um checklist direto para identificar por que os imóveis travam na carteira.\n\nSe quiser receber, é só responder esse e-mail.\n\nTiago',ativo:true},
+  {dia:15,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'{nome}, desocupação é um dos maiores pesadelos de quem trabalha com locação.\n\nVocê tem um processo definido para isso?\n\nVamos tomar um café virtual que eu te conto como outras imobiliárias resolveram isso.',ativo:true},
+  {dia:21,canal:'email',fase:'Despertar',assunto:'Inadimplência: o problema que ninguém quer ver',msg:'{nome},\n\nTrabalhei na Guarida Imóveis por anos. Lá acionávamos o inquilino no dia 3 de atraso. Não no dia 30.\n\nQuer saber como montar isso? Me responde ou acessa {site}.\n\nTiago',ativo:true},
+  {dia:28,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:'{nome}, pergunta direta: quando um proprietário liga reclamando, sua equipe tem resposta na hora?\n\nVamos tomar um café que eu te falo como resolver isso.',ativo:true},
+  {dia:35,canal:'email',fase:'Amadurecimento',assunto:'Diagnóstico gratuito — 3 vagas este mês',msg:'{nome},\n\nTodo mês abro 3 vagas para diagnóstico gratuito de 30 minutos com gestores de imobiliária.\n\nSem apresentação. Só análise.\n\nQuer uma vaga? Me responde.\n\nTiago\n{site}',ativo:true},
+  {dia:60,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:'{nome}, faz dois meses que a gente tem esse contato.\n\nMe dá 30 minutos essa semana? Sem apresentação. Só análise.\n\nVamos tomar um café? ☕',ativo:true},
+];
 
-async function marcarFeito(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);
-  if(!t)return;
-  t.status='feito';t.feitoEm=new Date().toISOString();
-  await window.saveExecTarefa(t);
-  await window.saveExecHistorico({id:gid(),tarefaId:id,leadId:t.leadId,leadNome:t.leadNome,tipo:t.tipo,texto:t.texto,data:t.data,executadoEm:new Date().toISOString(),diaCadencia:t.diaCadencia||null});
-  toast('✓ Marcado como feito');
-}
-
-async function pularExec(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);if(!t)return;
-  if(t.status==='feito'){t.status='pendente';t.feitoEm=null;}
-  else{t.status='pulado';t.puladoEm=new Date().toISOString();}
-  await window.saveExecTarefa(t);toast(t.status==='pendente'?'Desfeito':'Pulado');
-}
-
-function abrirWA(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);
-  const lead=(window._leads||[]).find(l=>l.id===t?.leadId);
-  const num=(lead?.contato||'').replace(/\D/g,'');
-  const msg=encodeURIComponent(t?.texto||'');
-  if(num){window.open('https://wa.me/55'+num+(msg?'?text='+msg:''),'_blank');}
-  else{navigator.clipboard.writeText(t?.texto||'').then(()=>toast('Sem número — mensagem copiada ✓'));}
-  marcarFeito(id);
-}
-
-function abrirEmail(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);
-  const lead=(window._leads||[]).find(l=>l.id===t?.leadId);
-  if(lead?.email){
-    window.open('mailto:'+lead.email+'?subject='+encodeURIComponent(t.assunto||'Contato — Tiago Seltenreich')+'&body='+encodeURIComponent(t.texto||''),'_blank');
-  }else{navigator.clipboard.writeText(t?.texto||'').then(()=>toast('Sem e-mail — mensagem copiada ✓'));}
-  marcarFeito(id);
-}
-
-function abrirLigacao(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);
-  const lead=(window._leads||[]).find(l=>l.id===t?.leadId);
-  const num=(lead?.contato||'').replace(/\D/g,'');
-  if(num){window.open('tel:+55'+num,'_self');}
-  else{toast('Número não cadastrado para este lead');}
-  marcarFeito(id);
-}
-
-function copiarMsgExec(id){
-  const t=(window._execTarefas||[]).find(x=>x.id===id);
-  if(t?.texto)navigator.clipboard.writeText(t.texto).then(()=>toast('Mensagem copiada ✓'));
-}
-
-function abrirMenuExec(leadId,e){
-  e.stopPropagation();
-  const lead=(window._leads||[]).find(l=>l.id===leadId);if(!lead)return;
-  window._execLeadId=leadId;
-  document.getElementById('execModalTitle').textContent=lead.nome;
-  document.getElementById('execModalSub').textContent='Escolha o canal para adicionar ao painel de hoje';
-  openModal('execModal');
-}
-
-async function addExecManual(tipo){
-  const leadId=window._execLeadId;
-  const lead=(window._leads||[]).find(l=>l.id===leadId);if(!lead)return;
-  const hj=hoje();
-  const textos={
-    whatsapp:'Oi '+( lead.nomeContato||lead.nome)+', tudo bem? Sou o Tiago Seltenreich, consultor de gestão para imobiliárias. Tenho uma pergunta rápida para você...',
-    email:(lead.nomeContato||lead.nome)+',\n\nEspero que esteja bem. Gostaria de apresentar brevemente meu trabalho com imobiliárias...\n\nTiago Seltenreich',
-    ligacao:'Ligar para '+(lead.nomeContato||lead.nome)+' — '+(lead.contato||'Sem número'),
-    followup:'Follow-up com '+lead.nome+' — verificar interesse e próximos passos'
-  };
-  await window.saveExecTarefa({id:gid(),leadId,leadNome:lead.nome,tipo,texto:textos[tipo]||'',assunto:'',data:hj,status:'pendente',criadoEm:new Date().toISOString()});
-  closeModal('execModal');
-  toast('Tarefa de '+tipo+' adicionada ao Painel ✓');
-}
-
-async function gerarExecucaoIA(){
-  const leads=(window._leads||[]).filter(l=>l.cadenciaAtiva&&l.cadenciaInicio);
-  if(!leads.length){toast('Nenhum lead com cadência ativa. Ative em Cadência Automática.');return;}
-  const hj=hoje();
-  let criadas=0;
-  for(const l of leads){
-    const inicio=new Date(l.cadenciaInicio);
-    const diasP=Math.floor((new Date(hj)-inicio)/(1000*60*60*24));
-    const jaTemHoje=(window._execTarefas||[]).some(t=>t.leadId===l.id&&t.data===hj);
-    if(jaTemHoje)continue;
-    const proxMsg=CADENCIA_PADRAO.find(m=>m.dia<=diasP&&m.dia>=(l.cadenciaDiaAtual||0)&&m.ativo);
-    if(!proxMsg)continue;
-    const texto=aplicarVariaveis(proxMsg.msg,l);
-    const tipo=proxMsg.canal==='whatsapp'?'whatsapp':'email';
-    await window.saveExecTarefa({id:gid(),leadId:l.id,leadNome:l.nome,tipo,texto,assunto:proxMsg.assunto||'',data:hj,status:'pendente',diaCadencia:proxMsg.dia,criadoEm:new Date().toISOString()});
-    criadas++;
-  }
-  toast(criadas>0?criadas+' tarefa(s) gerada(s) para hoje ✓':'Nenhuma nova tarefa — tudo em dia!');
-}
-
-function renderHistorico(){
-  const hist=window._execHistorico||[];
-  const el=document.getElementById('historicoContent');if(!el)return;
-  const ft=(document.getElementById('histFiltroTipo')||{}).value||'';
-  const lista=[...hist].filter(h=>!ft||h.tipo===ft).sort((a,b)=>b.executadoEm>a.executadoEm?1:-1);
-  if(!lista.length){el.innerHTML='<div class="placeholder"><i class="ti ti-history"></i><h3>Nenhum registro</h3><p>Execute ações no Painel para criar histórico.</p></div>';return;}
-  el.innerHTML=lista.map(h=>{
-    const c=EXEC_TIPOS[h.tipo]||EXEC_TIPOS.followup;
-    return '<div class="hist-item"><div class="hist-icon" style="background:rgba(0,0,0,.15)"><i class="ti '+c.icon+'" style="color:'+c.cor+'"></i></div><div style="flex:1"><div style="font-size:13px;color:var(--text);font-weight:500">'+esc(h.leadNome||'—')+' <span style="font-size:11px;color:var(--text3);font-weight:400">via '+c.label+'</span></div><div style="font-size:11px;color:var(--text3);">'+(h.diaCadencia?'Dia '+h.diaCadencia+' · ':'')+h.data+'</div></div><div style="font-size:11px;color:var(--text3);flex-shrink:0">'+(h.executadoEm?new Date(h.executadoEm).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'—')+'</div></div>';
-  }).join('');
-}
-
-// Widget do dashboard
-function renderDashExecucao(){
-  const hj=hoje();
-  const pend=(window._execTarefas||[]).filter(t=>t.data<=hj&&t.status==='pendente');
-  const el=document.getElementById('dashExecucao');if(!el)return;
-  if(!pend.length){el.innerHTML='<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--success)"><i class="ti ti-circle-check"></i> Nenhuma ação pendente hoje</div>';return;}
-  el.innerHTML=pend.slice(0,4).map(t=>{
-    const c=EXEC_TIPOS[t.tipo]||EXEC_TIPOS.followup;
-    const atrasada=t.data<hj;
-    return '<div onclick="nav('execucao',document.getElementById('sbExecucao'))" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--navy3);border-radius:6px;border:1px solid '+(atrasada?'rgba(224,96,48,.3)':'var(--border)')+';cursor:pointer;margin-bottom:5px"><i class="ti '+c.icon+'" style="color:'+c.cor+';font-size:14px"></i><div style="flex:1"><div style="font-size:12px;color:var(--text);font-weight:500">'+esc(t.leadNome)+'</div><div style="font-size:10px;color:var(--text3)">'+c.label+(atrasada?' · <span style=\"color:#F08050\">Atrasada</span>':'')+'</div></div><i class="ti ti-chevron-right" style="font-size:12px;color:var(--text3)"></i></div>';
-  }).join('')+(pend.length>4?'<div onclick="nav('execucao',document.getElementById('sbExecucao'))" style="text-align:center;font-size:11px;color:#F08050;cursor:pointer;padding:4px">+&nbsp;'+(pend.length-4)+' mais → Ver painel</div>':'');
+function aplicarVariaveis(texto,lead){
+  const site=window._config?.site||'tiagoseltenreich.com.br';
+  return texto
+    .replace(/\{nome\}/g,lead.nomeContato||lead.nome||'')
+    .replace(/\{imobiliaria\}/g,lead.nome||'')
+    .replace(/\{cidade\}/g,lead.cidade||'')
+    .replace(/\{site\}/g,site);
 }
 
 </script>
