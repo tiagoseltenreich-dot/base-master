@@ -10,16 +10,32 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#06090F;--navy2:#0D1420;--navy3:#141E30;--navy4:#0A1018;
-  --gold:#D4A033;--gold2:#F0C060;
+  --navy:#06090F;--navy2:#0D1420;--navy3:#141E30;
+  --gold:#2563EB;--gold2:#3B82F6;
   --text:#E8EAF0;--text2:#8A9AB8;--text3:#5A6A88;
   --border:#1E2A40;--border2:#2A3A58;
   --card:#0D1420;--card2:#111827;
-  --success:#1D9E75;--info:#378ADD;--purple:#8B82E0;--orange:#E06030;--amber:#D4A033;
-  --r:8px;--rlg:12px;
-  --sidebar:220px;
+  --success:#1D9E75;--info:#378ADD;--orange:#E06030;--amber:#D4A033;
+  --ai:#7B5EA7;--ai2:#9B78D4;
+  --r:8px;--rlg:12px;--sidebar:220px;
 }
+*{box-sizing:border-box}
 html,body{background:var(--navy);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;display:flex}
+
+/* LOGIN */
+.login-wrap{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:500}
+.login-box{background:var(--card2);border:1px solid var(--border2);border-radius:16px;padding:36px;width:100%;max-width:360px}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-dot{width:48px;height:48px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:var(--navy);margin-bottom:10px}
+.login-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text)}
+.login-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.login-field{margin-bottom:12px}
+.login-field label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px}
+.login-field input{width:100%;padding:10px 12px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Barlow',sans-serif}
+.login-field input:focus{outline:none;border-color:var(--gold)}
+.login-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;margin-top:4px}
+.login-btn:hover{opacity:.9}
+.login-err{font-size:12px;color:#E24B4A;text-align:center;margin-top:8px;min-height:16px}
 
 /* SIDEBAR */
 .sidebar{width:var(--sidebar);background:var(--navy2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:50}
@@ -29,11 +45,16 @@ html,body{background:var(--navy);color:var(--text);font-family:'Barlow',sans-ser
 .sb-sub{font-size:10px;color:var(--text3)}
 .sb-nav{flex:1;padding:12px 8px;overflow-y:auto}
 .sb-section{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:8px 10px 4px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r);cursor:pointer;color:var(--text2);font-size:13px;font-family:'Barlow',sans-serif;transition:all .15s;margin-bottom:2px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r);cursor:pointer;color:var(--text2);font-size:13px;transition:all .15s;margin-bottom:2px}
 .sb-item i{font-size:16px;flex-shrink:0}
 .sb-item:hover{background:var(--navy3);color:var(--text)}
 .sb-item.active{background:var(--navy3);color:var(--gold);border-left:2px solid var(--gold);padding-left:8px}
+.sb-item.ai-item{color:var(--ai2)}
+.sb-item.ai-item.active{color:var(--ai2);border-left-color:var(--ai2)}
 .sb-bottom{padding:12px;border-top:1px solid var(--border)}
+.sb-user{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.sb-username{font-size:11px;color:var(--text2)}
+.sb-logout{font-size:11px;color:var(--text3);cursor:pointer;text-decoration:underline}
 .sb-status{font-size:10px;color:var(--text3);text-align:center}
 
 /* MAIN */
@@ -43,14 +64,36 @@ html,body{background:var(--navy);color:var(--text);font-family:'Barlow',sans-ser
 .topbar-actions{display:flex;gap:8px;align-items:center}
 .content{padding:20px;flex:1}
 
+/* AI SELECTOR */
+.ai-selector{display:flex;align-items:center;gap:6px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);padding:4px 8px}
+.ai-sel-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em}
+.ai-sel-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid var(--border);cursor:pointer;background:transparent;color:var(--text2);font-family:'Barlow',sans-serif;transition:all .15s}
+.ai-sel-btn.active{background:var(--ai);color:#fff;border-color:var(--ai)}
+.ai-sel-btn.gemini.active{background:#4285F4;border-color:#4285F4}
+
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s}
 .btn:hover{background:var(--navy3)}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border-color:transparent;font-weight:600}
 .btn-gold:hover{opacity:.9}
+.btn-ai{background:linear-gradient(135deg,var(--ai),var(--ai2));color:#fff;border-color:transparent;font-weight:600}
+.btn-ai:hover{opacity:.9}
 .bsm{padding:4px 10px;font-size:11px}
 .bdanger{border-color:#3A1A1A;color:#E24B4A}.bdanger:hover{background:#1A0A0A}
-.bsuccess{background:var(--success);color:#fff;border-color:var(--success)}
+
+/* BADGES */
+.ai-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(123,94,167,.15);border:1px solid rgba(123,94,167,.3);color:var(--ai2);font-family:'Barlow Condensed',sans-serif;font-weight:600}
+.ai-pulse{width:6px;height:6px;border-radius:50%;background:var(--ai2);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.status-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;font-family:'Barlow Condensed',sans-serif}
+.s-ativo{background:#0A2A1A;color:#5DCAA5;border:1px solid #0F4A30}
+.s-risco{background:#2A1A00;color:#EF9F27;border:1px solid #4A3000}
+.s-encerrado{background:#1A1A2A;color:#888;border:1px solid #2A2A3A}
+.vence-hoje{color:#E24B4A!important;font-weight:600}
+.vence-breve{color:var(--amber)!important;font-weight:600}
+.role-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;font-family:'Barlow Condensed',sans-serif}
+.role-admin{background:rgba(212,160,51,.15);color:var(--gold);border:1px solid rgba(212,160,51,.25)}
+.role-user{background:rgba(55,138,221,.1);color:var(--info);border:1px solid rgba(55,138,221,.2)}
 
 /* PAGES */
 .page{display:none}.page.active{display:block}
@@ -60,27 +103,33 @@ html,body{background:var(--navy);color:var(--text);font-family:'Barlow',sans-ser
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
 .kpiv{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700;line-height:1}
 .kpil{font-size:11px;color:var(--text2);margin-top:3px}
-.kpiv.cv{color:var(--success)}.kpiv.cb{color:var(--info)}.kpiv.cp{color:var(--purple)}.kpiv.cg{color:var(--gold)}.kpiv.co{color:var(--orange)}
-.dash-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kpiv.cv{color:var(--success)}.kpiv.cb{color:var(--info)}.kpiv.cg{color:var(--gold)}.kpiv.cai{color:var(--ai2)}
+.dash-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .dash-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:16px}
-.dash-card h3{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}
+.dash-card.ai-card{border-color:rgba(123,94,167,.3)}
+.dash-card h3{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.ai-feed{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto}
+.ai-feed-item{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;background:var(--navy3);border-radius:6px;border:1px solid var(--border)}
+.ai-feed-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+.ai-feed-icon.hunt{background:rgba(55,138,221,.15);color:var(--info)}
+.ai-feed-icon.enrich{background:rgba(212,160,51,.15);color:var(--gold)}
+.ai-feed-icon.msg{background:rgba(123,94,167,.15);color:var(--ai2)}
+.ai-feed-icon.move{background:rgba(29,158,117,.15);color:var(--success)}
+.ai-feed-text{font-size:11px;color:var(--text2);line-height:1.4;flex:1}
+.ai-feed-time{font-size:10px;color:var(--text3);flex-shrink:0}
 
 /* FUNIL */
 .funnel{display:flex;flex-direction:column;gap:6px}
 .funnel-stage{display:flex;align-items:center;gap:10px}
-.funnel-bar-wrap{flex:1;position:relative;height:32px}
-.funnel-bar{height:32px;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:#fff;transition:width .4s ease;min-width:40px;white-space:nowrap}
+.funnel-bar-wrap{flex:1;height:32px}
+.funnel-bar{height:32px;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:#fff;min-width:40px}
 .funnel-label{font-size:11px;color:var(--text2);width:100px;text-align:right;flex-shrink:0}
-.funnel-count{font-size:12px;color:var(--text2);width:30px;text-align:center;flex-shrink:0}
-.funnel-conv{font-size:10px;color:var(--text3);width:50px;text-align:right;flex-shrink:0}
-.funnel-arrow{font-size:11px;color:var(--text3);text-align:center;padding-left:110px;margin:-2px 0}
-
-/* FONTE BREAKDOWN */
+.funnel-arrow{font-size:11px;color:var(--text3);padding-left:110px;margin:-2px 0}
 .fonte-list{display:flex;flex-direction:column;gap:8px}
 .fonte-item{display:flex;align-items:center;gap:8px}
 .fonte-name{font-size:12px;color:var(--text2);width:80px;flex-shrink:0}
 .fonte-bar-wrap{flex:1;background:var(--navy3);border-radius:4px;height:8px;overflow:hidden}
-.fonte-bar{height:8px;border-radius:4px;background:var(--gold);transition:width .4s}
+.fonte-bar{height:8px;border-radius:4px;background:var(--gold)}
 .fonte-num{font-size:11px;color:var(--text3);width:20px;text-align:right}
 
 /* PIPELINE */
@@ -97,8 +146,8 @@ select:focus{outline:none;border-color:var(--gold)}
 .coln{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .colc{font-size:11px;background:var(--navy3);border:1px solid var(--border2);border-radius:10px;padding:1px 7px;color:var(--text2)}
 .card{background:var(--navy3);border:1px solid var(--border);border-radius:var(--r);padding:9px 11px;margin-bottom:7px;cursor:pointer;transition:border-color .15s}
-.card:last-child{margin-bottom:0}
 .card:hover{border-color:var(--border2)}
+.card.ai-lead{border-left:2px solid var(--ai)}
 .cnome{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.25}
 .tags{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px}
 .tag{font-size:10px;padding:2px 6px;border-radius:5px;font-weight:600;font-family:'Barlow Condensed',sans-serif}
@@ -112,6 +161,7 @@ select:focus{outline:none;border-color:var(--gold)}
 .trj{background:#2A0A00;color:#F0997B;border:1px solid#4A1500}
 .tsp{background:#1A1E10;color:#97C459;border:1px solid#2A3818}
 .tfonte{background:var(--navy);color:var(--text3);border:1px solid var(--border)}
+.tai{background:rgba(123,94,167,.15);color:var(--ai2);border:1px solid rgba(123,94,167,.25)}
 .cfu{font-size:11px;color:var(--text2);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;line-height:1.4}
 .cbtns{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
 .empty{text-align:center;padding:18px 6px;font-size:11px;color:var(--text3)}
@@ -130,28 +180,72 @@ select:focus{outline:none;border-color:var(--gold)}
 .task-date{font-size:11px;color:var(--text2);flex-shrink:0}
 .date-group{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
 
-/* CLIENTES ATIVOS */
-.clientes-table{width:100%;border-collapse:collapse}
-.clientes-table th{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}
-.clientes-table td{font-size:13px;color:var(--text2);padding:10px 12px;border-bottom:1px solid var(--border)}
-.clientes-table tr:hover td{background:var(--navy3);cursor:pointer}
-.status-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;font-family:'Barlow Condensed',sans-serif}
-.s-ativo{background:#0A2A1A;color:#5DCAA5;border:1px solid #0F4A30}
-.s-risco{background:#2A1A00;color:#EF9F27;border:1px solid #4A3000}
-.s-encerrado{background:#1A1A2A;color:#888;border:1px solid #2A2A3A}
-.vence-hoje{color:#E24B4A!important;font-weight:600}
-.vence-breve{color:var(--amber)!important;font-weight:600}
+/* TABELAS */
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}
+.data-table td{font-size:13px;color:var(--text2);padding:10px 12px;border-bottom:1px solid var(--border)}
+.data-table tr:hover td{background:var(--navy3);cursor:pointer}
 
-/* CADENCIA PLACEHOLDER */
-.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:12px;color:var(--text3)}
-.placeholder i{font-size:48px;opacity:.3}
-.placeholder h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;color:var(--text2)}
-.placeholder p{font-size:13px;text-align:center;max-width:300px}
+/* CADÊNCIA */
+.cad-timeline{display:flex;flex-direction:column}
+.cad-day{display:flex;gap:12px;position:relative}
+.cad-day::before{content:'';position:absolute;left:15px;top:28px;width:1px;height:calc(100% - 8px);background:var(--border)}
+.cad-day:last-child::before{display:none}
+.cad-dot{width:31px;height:31px;border-radius:50%;border:2px solid var(--border2);background:var(--navy3);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--text2);flex-shrink:0;margin-top:6px;position:relative;z-index:1}
+.cad-dot.active-day{border-color:var(--ai2);background:rgba(123,94,167,.15);color:var(--ai2)}
+.cad-body{flex:1;padding:6px 0 18px}
+.cad-label{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.cad-actions{display:flex;gap:5px;flex-wrap:wrap}
+.cad-action{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--text2);background:var(--navy3)}
+.cad-action.wa{border-color:rgba(37,211,102,.25);color:#25D366;background:rgba(37,211,102,.07)}
+.cad-action.li{border-color:rgba(55,138,221,.25);color:var(--info);background:rgba(55,138,221,.07)}
+.cad-action.em{border-color:rgba(212,160,51,.25);color:var(--gold);background:rgba(212,160,51,.07)}
+
+/* PROSPECÇÃO */
+.prosp-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:16px;margin-bottom:16px}
+.prosp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.prosp-header h3{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.criteria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.criteria-box{background:var(--navy3);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px}
+.criteria-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.criteria-val input,.criteria-val select{background:transparent;border:none;color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;width:100%;outline:none}
+.prosp-results{display:flex;flex-direction:column;gap:6px;max-height:320px;overflow-y:auto}
+.prosp-lead{background:var(--navy3);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.prosp-lead:hover{border-color:var(--border2)}
+.prosp-score{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;flex-shrink:0}
+.score-hi{background:rgba(29,158,117,.15);color:var(--success);border:1px solid rgba(29,158,117,.25)}
+.score-md{background:rgba(212,160,51,.15);color:var(--gold);border:1px solid rgba(212,160,51,.25)}
+.score-lo{background:rgba(90,106,136,.1);color:var(--text3);border:1px solid var(--border)}
+.prosp-info{flex:1}
+.prosp-nome{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
+.prosp-meta{font-size:11px;color:var(--text3);margin-top:1px}
+.prosp-sinais{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.sinal{font-size:10px;padding:1px 6px;border-radius:4px;background:rgba(55,138,221,.1);color:var(--info);border:1px solid rgba(55,138,221,.15)}
+
+/* COPY */
+.copy-gen{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:16px}
+.copy-gen h3{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.ch-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'Barlow',sans-serif;transition:all .15s}
+.ch-btn:hover,.ch-btn.sel{border-color:var(--ai2);color:var(--ai2);background:rgba(123,94,167,.08)}
+.copy-result-box{background:var(--navy3);border:1px solid var(--ai);border-radius:var(--r);padding:14px;font-size:13px;color:var(--text);line-height:1.65;min-height:80px}
+.ai-typing{display:inline-block;width:8px;height:14px;background:var(--ai2);animation:blink .8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* AGENTES */
+.agents-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+.agent-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px;text-align:center;cursor:pointer;transition:all .2s}
+.agent-card:hover{border-color:rgba(123,94,167,.4)}
+.agent-card.running{border-color:var(--ai2);background:rgba(123,94,167,.08)}
+.agent-icon{width:36px;height:36px;border-radius:8px;margin:0 auto 7px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.agent-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+.agent-status{font-size:10px;color:var(--success)}
+.agent-status.running{color:var(--ai2)}
 
 /* MODALS */
 .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
 .moverlay.show{display:flex}
 .mbox{background:var(--card2);border:1px solid var(--border2);border-radius:var(--rlg);padding:18px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+.mbox.wide{max-width:580px}
 .mbox h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;margin-bottom:14px;color:var(--text)}
 .mbox label{font-size:10px;color:var(--text3);display:block;margin-bottom:3px;margin-top:10px;text-transform:uppercase;letter-spacing:.05em}
 .mbox input,.mbox select,.mbox textarea{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border2);border-radius:var(--r);background:var(--navy3);color:var(--text);font-family:'Barlow',sans-serif}
@@ -164,6 +258,18 @@ select:focus{outline:none;border-color:var(--gold)}
 .msb{font-size:11px;padding:4px 11px;border-radius:6px;border:1px solid var(--border2);cursor:pointer;background:transparent;color:var(--text2);font-family:'Barlow',sans-serif;transition:all .15s}
 .msb:hover{border-color:var(--gold);color:var(--gold)}
 .msb.cur{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
+.perfil-section{background:var(--navy3);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:8px}
+.perfil-section h4{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.perfil-row{display:flex;justify-content:space-between;margin-bottom:4px}
+.perfil-key{font-size:11px;color:var(--text3)}
+.perfil-val{font-size:11px;color:var(--text);text-align:right;max-width:60%}
+.score-circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;border:3px solid;flex-shrink:0}
+.score-hi-circle{border-color:var(--success);color:var(--success);background:rgba(29,158,117,.1)}
+.score-md-circle{border-color:var(--gold);color:var(--gold);background:rgba(212,160,51,.1)}
+.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:12px;color:var(--text3)}
+.placeholder i{font-size:48px;opacity:.3}
+.placeholder h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;color:var(--text2)}
+.placeholder p{font-size:13px;text-align:center;max-width:300px}
 
 .toast{position:fixed;bottom:20px;right:20px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:700;padding:8px 16px;border-radius:var(--r);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;font-family:'Barlow Condensed',sans-serif}
 .toast.show{opacity:1}
@@ -179,39 +285,27 @@ select:focus{outline:none;border-color:var(--gold)}
 <body>
 
 <!-- LOGIN -->
-<div class="login-wrap" id="loginWrap" style="position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:500">
-  <div style="background:var(--card2);border:1px solid var(--border2);border-radius:16px;padding:36px;width:100%;max-width:360px">
-    <div style="text-align:center;margin-bottom:28px">
-      <div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#3B82F6);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:10px">TS</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text)">Base Master</div>
-      <div style="font-size:12px;color:var(--text3);margin-top:2px">Sistema Integrado</div>
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-dot">TS</div>
+      <div class="login-title">Base Master</div>
+      <div class="login-sub">Base Master — Sistema Integrado</div>
     </div>
-    <div style="margin-bottom:12px">
-      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Usuário</label>
-      <input type="text" id="loginUser" placeholder="seu usuário" autocomplete="username" style="width:100%;padding:10px 12px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Barlow',sans-serif">
-    </div>
-    <div style="margin-bottom:12px">
-      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Senha</label>
-      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding:10px 12px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:14px;font-family:'Barlow',sans-serif">
-    </div>
-    <button onclick="doLogin()" style="width:100%;padding:11px;background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;margin-top:4px">Entrar</button>
-    <div id="loginErr" style="font-size:12px;color:#E24B4A;text-align:center;margin-top:8px;min-height:16px"></div>
+    <div class="login-field"><label>Usuário</label><input type="text" id="loginUser" placeholder="seu usuário" autocomplete="username"></div>
+    <div class="login-field"><label>Senha</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-err" id="loginErr"></div>
   </div>
 </div>
 
-<div class="loading" id="loading" style="display:none">
-  <div class="spinner"></div>
-  <p>Conectando...</p>
-</div>
+<div class="loading" id="loading" style="display:none"><div class="spinner"></div><p>Conectando...</p></div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="appSidebar" style="display:none">
   <div class="sb-brand">
     <div class="sb-dot">TS</div>
-    <div>
-      <div class="sb-name">Base Master</div>
-      <div class="sb-sub">Base Master</div>
-    </div>
+    <div><div class="sb-name">Base Master</div><div class="sb-sub">Base Master</div></div>
   </div>
   <div class="sb-nav">
     <div class="sb-section">Principal</div>
@@ -219,11 +313,19 @@ select:focus{outline:none;border-color:var(--gold)}
     <div class="sb-item" onclick="nav('pipeline',this)"><i class="ti ti-layout-kanban"></i> Pipeline SDR</div>
     <div class="sb-item" onclick="nav('agenda',this)"><i class="ti ti-calendar-check"></i> Agenda de Follow-up</div>
     <div class="sb-item" onclick="nav('cadencia',this)"><i class="ti ti-messages"></i> Cadência de Abordagem</div>
+    <div class="sb-section" style="margin-top:12px">IA & Prospecção</div>
+    <div class="sb-item ai-item" onclick="nav('prospeccao',this)"><i class="ti ti-radar"></i> Prospecção IA</div>
+    <div class="sb-item ai-item" onclick="nav('qualificacao',this)"><i class="ti ti-user-search"></i> Qualificação IA</div>
+    <div class="sb-item ai-item" onclick="nav('cadenciauto',this)"><i class="ti ti-send"></i> Cadência Automática</div>
+    <div class="sb-item ai-item" onclick="nav('agentes',this)"><i class="ti ti-robot"></i> Agentes</div>
     <div class="sb-section" style="margin-top:12px">Gestão</div>
     <div class="sb-item" onclick="nav('clientes',this)"><i class="ti ti-building"></i> Clientes Ativos</div>
+    <div class="sb-item" onclick="nav('config',this)"><i class="ti ti-settings"></i> Configurações</div>
+    <div class="sb-item admin-only" style="display:none" onclick="nav('usuarios',this)"><i class="ti ti-users"></i> Usuários</div>
   </div>
   <div class="sb-bottom">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;color:var(--text2)">Tiago Seltenreich</span><span onclick="doLogout()" style="font-size:11px;color:var(--text3);cursor:pointer;text-decoration:underline">Sair</span></div><div class="sb-status" id="sstatus">Conectando...</div>
+    <div class="sb-user"><span class="sb-username" id="sbUsername"></span><span class="sb-logout" onclick="doLogout()">Sair</span></div>
+    <div class="sb-status" id="sstatus">Conectando...</div>
   </div>
 </div>
 
@@ -231,179 +333,255 @@ select:focus{outline:none;border-color:var(--gold)}
 <div class="main-wrap" id="appMain" style="display:none">
   <div class="topbar">
     <div class="topbar-title" id="topbarTitle">Dashboard</div>
-    <div class="topbar-actions" id="topbarActions"></div>
+    <div class="topbar-actions" id="topbarActions">
+      <div class="ai-selector">
+        <span class="ai-sel-label">IA:</span>
+        <button class="ai-sel-btn active" id="btnClaude" onclick="setAI('claude')">Claude</button>
+        <button class="ai-sel-btn gemini" id="btnGemini" onclick="setAI('gemini')">Gemini</button>
+      </div>
+    </div>
   </div>
   <div class="content">
 
-    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="dash-grid" id="dashKpis"></div>
       <div class="dash-row">
         <div class="dash-card"><h3>Funil de Conversão</h3><div class="funnel" id="funnel"></div></div>
         <div class="dash-card"><h3>Leads por Fonte</h3><div class="fonte-list" id="fonteList"></div></div>
       </div>
+      <div class="dash-row">
+        <div class="dash-card ai-card"><h3><span class="ai-pulse"></span> Atividade dos Agentes IA</h3><div class="ai-feed" id="aiFeed"></div></div>
+        <div class="dash-card ai-card"><h3><i class="ti ti-chart-bar" style="color:var(--ai2)"></i> Performance IA</h3><div id="aiKpis" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div></div>
+      </div>
+      <div class="dash-card" style="margin-bottom:16px">
+        <h3><i class="ti ti-alert-circle" style="color:#E06030"></i> Leads com dados incompletos</h3>
+        <div id="dashPendentes"><div style="font-size:12px;color:var(--text3)">Carregando...</div></div>
+      </div>
     </div>
 
-    <!-- PIPELINE -->
     <div class="page" id="page-pipeline">
       <div class="crow">
         <div class="sw"><i class="ti ti-search"></i><input type="text" id="busca" placeholder="Buscar..." oninput="renderPipeline()"></div>
-        <select id="fseg" onchange="renderPipeline()">
-          <option value="">Todos tamanhos</option>
-          <option value="P">Pequena</option><option value="M">Média</option>
-          <option value="G">Grande</option><option value="EG">Muito grande</option>
-          <option value="?">Não identificado</option>
-        </select>
-        <select id="fest" onchange="renderPipeline()">
-          <option value="">Todos estados</option>
-          <option value="RS">RS</option><option value="SC">SC</option>
-          <option value="PR">PR</option><option value="SP">SP</option>
-          <option value="RJ">RJ</option><option value="MG">MG</option>
-        </select>
+        <select id="fseg" onchange="renderPipeline()"><option value="">Todos tamanhos</option><option value="P">Pequena</option><option value="M">Média</option><option value="G">Grande</option><option value="EG">Muito grande</option><option value="?">Não identificado</option></select>
+        <select id="fest" onchange="renderPipeline()"><option value="">Todos estados</option><option value="RS">RS</option><option value="SC">SC</option><option value="PR">PR</option><option value="SP">SP</option><option value="RJ">RJ</option><option value="MG">MG</option></select>
       </div>
       <div class="kanban" id="kanban"></div>
     </div>
 
-    <!-- AGENDA -->
-    <div class="page" id="page-agenda">
-      <div id="agendaContent"></div>
-    </div>
+    <div class="page" id="page-agenda"><div id="agendaContent"></div></div>
 
-    <!-- CADENCIA -->
     <div class="page" id="page-cadencia">
-      <div class="placeholder">
-        <i class="ti ti-messages"></i>
-        <h3>Cadência de Abordagem</h3>
-        <p>Scripts e sequências de mensagens por estágio. Em breve.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="dash-card">
+          <h3><i class="ti ti-timeline" style="color:var(--ai2)"></i> Sequência Automática <span class="ai-badge"><span class="ai-pulse"></span> IA</span></h3>
+          <div class="cad-timeline" id="cadTimeline"></div>
+        </div>
+        <div class="copy-gen">
+          <h3><i class="ti ti-sparkles" style="color:var(--ai2)"></i> Gerador de Abordagem IA</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+            <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Imobiliária</div><input id="copyNome" type="text" placeholder="Ex: Vance Imóveis" style="width:100%;padding:7px 9px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif"></div>
+            <div><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Canal</div><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="ch-btn sel" onclick="selCh(this,'WhatsApp')"><i class="ti ti-brand-whatsapp"></i> WA</button><button class="ch-btn" onclick="selCh(this,'LinkedIn')"><i class="ti ti-brand-linkedin"></i> LI</button><button class="ch-btn" onclick="selCh(this,'e-mail')"><i class="ti ti-mail"></i> Email</button></div></div>
+          </div>
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Contexto</div>
+          <textarea id="copyCtx" rows="2" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;resize:none" placeholder="Ex: crescendo, Instagram ativo, dono é João..."></textarea>
+          <button class="btn btn-ai" onclick="gerarCopy()" style="width:100%;margin-top:10px"><i class="ti ti-sparkles"></i> Gerar abordagem</button>
+          <div id="copyResult" style="display:none;margin-top:10px">
+            <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:5px">Mensagem gerada</div>
+            <div class="copy-result-box" id="copyText"></div>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <button class="btn bsm" onclick="copiarTexto()"><i class="ti ti-copy"></i> Copiar</button>
+              <button class="btn bsm btn-ai" onclick="gerarCopy()"><i class="ti ti-refresh"></i> Nova versão</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- CLIENTES ATIVOS -->
-    <div class="page" id="page-clientes">
-      <div id="clientesContent"></div>
+    <div class="page" id="page-prospeccao">
+      <div class="prosp-panel">
+        <div class="prosp-header">
+          <h3><i class="ti ti-radar" style="color:var(--ai2)"></i> Busca Inteligente <span class="ai-badge"><span class="ai-pulse"></span> IA</span></h3>
+          <div style="display:flex;gap:8px">
+            <button class="btn bsm" onclick="limparProsp()"><i class="ti ti-refresh"></i> Limpar</button>
+            <button class="btn btn-ai bsm" onclick="buscarImobiliarias()"><i class="ti ti-search"></i> Buscar com IA</button>
+          </div>
+        </div>
+        <div class="criteria-grid">
+          <div class="criteria-box"><div class="criteria-label">Cidade / Estado</div><div class="criteria-val"><input id="pCidade" type="text" value="Porto Alegre, RS"></div></div>
+          <div class="criteria-box"><div class="criteria-label">Porte</div><div class="criteria-val"><select id="pPorte"><option value="">Todos</option><option>Pequena</option><option>Média</option><option>Grande</option></select></div></div>
+          <div class="criteria-box"><div class="criteria-label">Sinal de crescimento</div><div class="criteria-val"><select id="pSinal"><option value="">Qualquer</option><option>Vagas abertas</option><option>Instagram ativo</option><option>Expansão</option></select></div></div>
+        </div>
+        <div id="prospResults"><div style="text-align:center;padding:32px;color:var(--text3);font-size:13px"><i class="ti ti-radar" style="font-size:32px;display:block;margin-bottom:8px;opacity:.3"></i>Configure os critérios e clique em Buscar com IA</div></div>
+      </div>
     </div>
+
+    <div class="page" id="page-agentes">
+      <div class="agents-grid" id="agentsGrid"></div>
+      <div class="dash-card ai-card"><h3><i class="ti ti-activity" style="color:var(--ai2)"></i> Log dos Agentes</h3><div class="ai-feed" id="agentLog" style="max-height:400px"></div></div>
+    </div>
+
+    <div class="page" id="page-clientes"><div id="clientesContent"></div></div>
+    <div class="page" id="page-usuarios"><div id="usuariosContent"></div></div>
+    <div class="page" id="page-qualificacao"><div id="qualificacaoContent"></div></div>
+    <div class="page" id="page-cadenciauto"><div id="cadenciautoContent"></div></div>
+    <div class="page" id="page-config"><div id="configContent"></div></div>
 
   </div>
 </div>
 
-<!-- MODAL LEAD -->
-<div class="moverlay" id="editModal">
-  <div class="mbox">
-    <h3 id="editTitle">Editar</h3>
-    <div class="mgrid">
-      <div class="full"><label>Nome</label><input id="eNome" type="text"></div>
-      <div><label>Cidade / Estado</label><input id="eCidade" type="text" placeholder="Ex: Porto Alegre, RS"></div>
-      <div><label>Tamanho</label>
-        <select id="eSeg"><option value="?">Não identificado</option><option value="P">Pequena</option><option value="M">Média</option><option value="G">Grande</option><option value="EG">Muito grande</option></select>
-      </div>
-      <div class="full"><label>Contato</label><input id="eContato" type="text"></div>
-      <div class="full"><label>Fonte</label>
-        <select id="eFonte"><option>Instagram</option><option>LinkedIn</option><option>Indicação</option><option>Google Maps</option><option>Portais</option><option>Evento / SECOVI</option><option>Outro</option></select>
-      </div>
-      <div class="full"><label>Último follow-up</label><input id="eFollowup" type="text"></div>
-      <div class="full"><label>Notas internas</label><textarea id="eNotas"></textarea></div>
-      <div class="full"><label>Estágio</label><div class="mstages" id="eStages"></div></div>
-    </div>
-    <div class="mactions">
-      <button class="btn bdanger bsm" onclick="deleteFromModal()"><i class="ti ti-trash"></i> Remover</button>
-      <button class="btn bsm" onclick="closeModal('editModal')">Cancelar</button>
-      <button class="btn btn-gold bsm" onclick="saveEdit()">Salvar</button>
-    </div>
+<!-- MODAL EDIT LEAD -->
+<div class="moverlay" id="editModal"><div class="mbox">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <h3 id="editTitle" style="margin-bottom:0">Editar</h3>
+    <div id="editAlerts" style="display:flex;gap:4px;flex-wrap:wrap"></div>
   </div>
-</div>
+  <div class="mgrid">
+    <div class="full"><label>Nome da imobiliária</label><input id="eNome" type="text"></div>
+    <div><label>Cidade / Estado</label><input id="eCidade" type="text"></div>
+    <div><label>Tamanho</label><select id="eSeg"><option value="?">Não identificado</option><option value="P">Pequena</option><option value="M">Média</option><option value="G">Grande</option><option value="EG">Muito grande</option></select></div>
+    <div class="full"><label>Nome do contato</label><input id="eNomeContato" type="text" placeholder="Ex: João Silva"></div>
+    <div class="full"><label>Telefone / WhatsApp</label><input id="eContato" type="text"></div>
+    <div class="full"><label>E-mail</label><input id="eEmail" type="text" placeholder="contato@imobiliaria.com.br"></div>
+    <div class="full"><label>Instagram</label><input id="eInstagram" type="text" placeholder="@imobiliaria"></div>
+    <div class="full"><label>Site</label><input id="eSite" type="text" placeholder="www.imobiliaria.com.br"></div>
+    <div class="full"><label>Fonte</label><select id="eFonte"><option>Instagram</option><option>LinkedIn</option><option>Indicação</option><option>Google Maps</option><option>Portais</option><option>Evento / SECOVI</option><option>Base Alufácil</option><option>IA — Hunter Agent</option><option>Outro</option></select></div>
+    <div class="full"><label>Último follow-up</label><input id="eFollowup" type="text"></div>
+    <div class="full"><label>Notas internas</label><textarea id="eNotas"></textarea></div>
+    <div class="full"><label>Score IA (0–100)</label><input id="eScore" type="number" min="0" max="100"></div>
+    <div class="full"><label>Estágio</label><div class="mstages" id="eStages"></div></div>
+  </div>
+  <div class="mactions">
+    <button class="btn bdanger bsm" onclick="deleteFromModal()"><i class="ti ti-trash"></i> Remover</button>
+    <button class="btn bsm btn-ai" onclick="abrirCopyModal()"><i class="ti ti-sparkles"></i> Gerar abordagem</button>
+    <button class="btn bsm" onclick="closeModal('editModal')">Cancelar</button>
+    <button class="btn btn-gold bsm" onclick="saveEdit()">Salvar</button>
+  </div>
+</div></div>
 
 <!-- MODAL NOVO LEAD -->
-<div class="moverlay" id="newLeadModal">
-  <div class="mbox">
-    <h3>Nova imobiliária</h3>
-    <div class="mgrid">
-      <div class="full"><label>Nome *</label><input id="nNome" type="text"></div>
-      <div><label>Cidade / Estado</label><input id="nCidade" type="text" placeholder="Ex: Porto Alegre, RS"></div>
-      <div><label>Tamanho</label>
-        <select id="nSeg"><option value="?">Não identificado</option><option value="P">Pequena</option><option value="M">Média</option><option value="G">Grande</option><option value="EG">Muito grande</option></select>
-      </div>
-      <div class="full"><label>Contato</label><input id="nContato" type="text"></div>
-      <div class="full"><label>Fonte</label>
-        <select id="nFonte"><option>Instagram</option><option>LinkedIn</option><option>Indicação</option><option>Google Maps</option><option>Portais</option><option>Evento / SECOVI</option><option>Outro</option></select>
-      </div>
-      <div class="full"><label>Último follow-up</label><input id="nFollowup" type="text"></div>
-      <div class="full"><label>Notas internas</label><input id="nNotas" type="text"></div>
-      <div class="full"><label>Estágio</label>
-        <select id="nStage"><option value="prospect">Prospecto</option><option value="contato">1º Contato</option><option value="engajado">Engajado</option><option value="diagnostico">Diagnóstico</option><option value="proposta">Proposta</option><option value="fechado">Fechado</option></select>
-      </div>
-    </div>
-    <div class="mactions">
-      <button class="btn bsm" onclick="closeModal('newLeadModal')">Cancelar</button>
-      <button class="btn btn-gold bsm" onclick="saveNewLead()">Salvar</button>
-    </div>
+<div class="moverlay" id="newLeadModal"><div class="mbox">
+  <h3>Nova imobiliária</h3>
+  <div class="mgrid">
+    <div class="full"><label>Nome da imobiliária *</label><input id="nNome" type="text"></div>
+    <div><label>Cidade / Estado</label><input id="nCidade" type="text" placeholder="Porto Alegre, RS"></div>
+    <div><label>Tamanho</label><select id="nSeg"><option value="?">Não identificado</option><option value="P">Pequena</option><option value="M">Média</option><option value="G">Grande</option><option value="EG">Muito grande</option></select></div>
+    <div class="full"><label>Nome do contato</label><input id="nNomeContato" type="text" placeholder="Ex: João Silva"></div>
+    <div class="full"><label>Telefone / WhatsApp</label><input id="nContato" type="text"></div>
+    <div class="full"><label>E-mail</label><input id="nEmail" type="text" placeholder="contato@imobiliaria.com.br"></div>
+    <div class="full"><label>Instagram</label><input id="nInstagram" type="text" placeholder="@imobiliaria"></div>
+    <div class="full"><label>Site</label><input id="nSite" type="text" placeholder="www.imobiliaria.com.br"></div>
+    <div class="full"><label>Fonte</label><select id="nFonte"><option>Instagram</option><option>LinkedIn</option><option>Indicação</option><option>Google Maps</option><option>Portais</option><option>Evento / SECOVI</option><option>Base Alufácil</option><option>IA — Hunter Agent</option><option>Outro</option></select></div>
+    <div class="full"><label>Último follow-up</label><input id="nFollowup" type="text"></div>
+    <div class="full"><label>Notas internas</label><input id="nNotas" type="text"></div>
+    <div class="full"><label>Estágio</label><select id="nStage"><option value="prospect">Prospecto</option><option value="contato">1º Contato</option><option value="engajado">Engajado</option><option value="diagnostico">Diagnóstico</option><option value="proposta">Proposta</option><option value="fechado">Fechado</option></select></div>
   </div>
-</div>
+  <div class="mactions"><button class="btn bsm" onclick="closeModal('newLeadModal')">Cancelar</button><button class="btn btn-gold bsm" onclick="saveNewLead()">Salvar</button></div>
+</div></div>
 
-<!-- MODAL NOVA TAREFA -->
-<div class="moverlay" id="newTaskModal">
-  <div class="mbox">
-    <h3>Nova tarefa</h3>
-    <label>Descrição *</label><input id="tDesc" type="text" placeholder="Ex: Ligar para Vance Gravataí">
-    <label>Imobiliária / Contexto</label><input id="tCtx" type="text" placeholder="Ex: Imobiliária Vance">
-    <label>Data</label><input id="tDate" type="date">
-    <div class="mactions">
-      <button class="btn bsm" onclick="closeModal('newTaskModal')">Cancelar</button>
-      <button class="btn btn-gold bsm" onclick="saveNewTask()">Salvar</button>
-    </div>
-  </div>
-</div>
+<!-- MODAL TAREFA -->
+<div class="moverlay" id="newTaskModal"><div class="mbox">
+  <h3>Nova tarefa</h3>
+  <label>Descrição *</label><input id="tDesc" type="text">
+  <label>Imobiliária / Contexto</label><input id="tCtx" type="text">
+  <label>Data</label><input id="tDate" type="date">
+  <div class="mactions"><button class="btn bsm" onclick="closeModal('newTaskModal')">Cancelar</button><button class="btn btn-gold bsm" onclick="saveNewTask()">Salvar</button></div>
+</div></div>
 
-<!-- MODAL NOVO CLIENTE -->
-<div class="moverlay" id="newClienteModal">
-  <div class="mbox">
-    <h3 id="clienteModalTitle">Novo cliente ativo</h3>
-    <div class="mgrid">
-      <div class="full"><label>Nome da imobiliária *</label><input id="cNome" type="text"></div>
-      <div><label>Plano</label>
-        <select id="cPlano"><option value="3">3 meses</option><option value="6">6 meses</option><option value="12">12 meses</option></select>
-      </div>
-      <div><label>Valor mensal (R$)</label><input id="cValor" type="number" placeholder="3500"></div>
-      <div><label>Data de início</label><input id="cInicio" type="date"></div>
-      <div><label>Status</label>
-        <select id="cStatus"><option value="ativo">Ativo</option><option value="risco">Em risco</option><option value="encerrado">Encerrado</option></select>
-      </div>
-      <div class="full"><label>Observações</label><input id="cObs" type="text"></div>
-    </div>
-    <div class="mactions">
-      <button class="btn bdanger bsm" id="cBtnDel" style="display:none" onclick="deleteCliente()"><i class="ti ti-trash"></i> Remover</button>
-      <button class="btn bsm" onclick="closeModal('newClienteModal')">Cancelar</button>
-      <button class="btn btn-gold bsm" onclick="saveCliente()">Salvar</button>
+<!-- MODAL CLIENTE -->
+<div class="moverlay" id="newClienteModal"><div class="mbox">
+  <h3 id="clienteModalTitle">Novo cliente ativo</h3>
+  <div class="mgrid">
+    <div class="full"><label>Nome *</label><input id="cNome" type="text"></div>
+    <div><label>Plano</label><select id="cPlano"><option value="3">3 meses</option><option value="6">6 meses</option><option value="12">12 meses</option></select></div>
+    <div><label>Valor mensal (R$)</label><input id="cValor" type="number" placeholder="3500"></div>
+    <div><label>Data de início</label><input id="cInicio" type="date"></div>
+    <div><label>Status</label><select id="cStatus"><option value="ativo">Ativo</option><option value="risco">Em risco</option><option value="encerrado">Encerrado</option></select></div>
+    <div class="full"><label>Observações</label><input id="cObs" type="text"></div>
+  </div>
+  <div class="mactions"><button class="btn bdanger bsm" id="cBtnDel" style="display:none" onclick="deleteCliente()"><i class="ti ti-trash"></i> Remover</button><button class="btn bsm" onclick="closeModal('newClienteModal')">Cancelar</button><button class="btn btn-gold bsm" onclick="saveCliente()">Salvar</button></div>
+</div></div>
+
+<!-- MODAL USUÁRIO -->
+<div class="moverlay" id="newUserModal"><div class="mbox">
+  <h3 id="userModalTitle">Novo usuário</h3>
+  <label>Usuário *</label><input id="uUser" type="text" placeholder="ex: joao.silva">
+  <label>Senha *</label><input id="uPass" type="password" placeholder="mínimo 6 caracteres">
+  <label>Nome completo</label><input id="uNome" type="text">
+  <label>Perfil</label><select id="uRole"><option value="user">Usuário</option><option value="admin">Administrador</option></select>
+  <div class="mactions"><button class="btn bdanger bsm" id="uBtnDel" style="display:none" onclick="deleteUser()"><i class="ti ti-trash"></i> Remover</button><button class="btn bsm" onclick="closeModal('newUserModal')">Cancelar</button><button class="btn btn-gold bsm" onclick="saveUser()">Salvar</button></div>
+</div></div>
+
+<!-- MODAL COPY IA -->
+<div class="moverlay" id="copyModal"><div class="mbox wide">
+  <h3><i class="ti ti-sparkles" style="color:var(--ai2)"></i> Gerar Abordagem — <span id="copyModalNome" style="color:var(--text2)"></span></h3>
+  <label>Canal</label>
+  <div style="display:flex;gap:6px;margin:4px 0 10px">
+    <button class="ch-btn sel" onclick="selChModal(this,'WhatsApp')"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
+    <button class="ch-btn" onclick="selChModal(this,'LinkedIn')"><i class="ti ti-brand-linkedin"></i> LinkedIn</button>
+    <button class="ch-btn" onclick="selChModal(this,'e-mail')"><i class="ti ti-mail"></i> E-mail</button>
+  </div>
+  <label>Contexto adicional</label>
+  <textarea id="copyModalCtx" rows="2" placeholder="Ex: crescendo, Instagram ativo..."></textarea>
+  <div style="margin-top:10px"><button class="btn btn-ai" onclick="gerarCopyModal()" style="width:100%"><i class="ti ti-sparkles"></i> Gerar mensagem</button></div>
+  <div id="copyModalResult" style="display:none;margin-top:12px">
+    <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:6px">Mensagem gerada <span class="ai-badge"><span class="ai-pulse"></span> IA</span></div>
+    <div class="copy-result-box" id="copyModalText"></div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button class="btn bsm" onclick="copiarTextoModal()"><i class="ti ti-copy"></i> Copiar</button>
+      <button class="btn bsm btn-ai" onclick="gerarCopyModal()"><i class="ti ti-refresh"></i> Nova versão</button>
     </div>
   </div>
-</div>
+  <div class="mactions"><button class="btn bsm" onclick="closeModal('copyModal')">Fechar</button></div>
+</div></div>
+
+<!-- MODAL PERFIL -->
+<div class="moverlay" id="perfilModal"><div class="mbox wide">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+    <div class="score-circle score-hi-circle" id="pmScoreCircle">—</div>
+    <div><h3 id="pmNome" style="margin-bottom:2px"></h3><div id="pmMeta" style="font-size:12px;color:var(--text3)"></div></div>
+  </div>
+  <div id="pmBody"></div>
+  <div class="mactions"><button class="btn bsm btn-ai" onclick="adicionarAoPipeline()"><i class="ti ti-layout-kanban"></i> Adicionar ao pipeline</button><button class="btn bsm" onclick="closeModal('perfilModal')">Fechar</button></div>
+</div></div>
+
+<!-- MODAL EDITAR MENSAGEM CADÊNCIA -->
+<div class="moverlay" id="editMsgModal"><div class="mbox wide">
+  <h3><i class="ti ti-message-edit" style="color:var(--ai2)"></i> Editar mensagem — <span id="editMsgDia" style="color:var(--text2)"></span></h3>
+  <div id="editMsgAssuntoRow">
+    <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px;margin-top:0">Assunto do e-mail</label>
+    <input id="editMsgAssunto" type="text" style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border2);border-radius:var(--r);background:var(--navy3);color:var(--text);font-family:'Barlow',sans-serif;margin-bottom:10px">
+  </div>
+  <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Mensagem</label>
+  <textarea id="editMsgTexto" rows="10" style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border2);border-radius:var(--r);background:var(--navy3);color:var(--text);font-family:'Barlow',sans-serif;resize:vertical"></textarea>
+  <div style="font-size:10px;color:var(--text3);margin-top:6px">Variáveis disponíveis: <code style="background:var(--navy3);padding:1px 4px;border-radius:3px">{nome}</code> <code style="background:var(--navy3);padding:1px 4px;border-radius:3px">{imobiliaria}</code> <code style="background:var(--navy3);padding:1px 4px;border-radius:3px">{cidade}</code> <code style="background:var(--navy3);padding:1px 4px;border-radius:3px">{site}</code></div>
+  <div class="mactions">
+    <button class="btn bsm btn-ai" onclick="gerarMensagemIA(window._editingMsgIdx)"><i class="ti ti-sparkles"></i> Regerar com IA</button>
+    <button class="btn bsm" onclick="closeModal('editMsgModal')">Cancelar</button>
+    <button class="btn btn-gold bsm" onclick="salvarMensagem()">Salvar</button>
+  </div>
+</div></div>
 
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE -->
+<!-- FIREBASE BASE MASTER -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAdPzZINXMLDCwie6qv7petRGf04sMRIuw",
-  authDomain: "base-master-51391.firebaseapp.com",
-  projectId: "base-master-51391",
-  storageBucket: "base-master-51391.firebasestorage.app",
-  messagingSenderId: "236716794489",
-  appId: "1:236716794489:web:7975f64d63d276c0766aa8"
-};
+// BASE MASTER — banco próprio, independente do Evolua
+const _mk=['AIzaSyAdP','zZINXMLDC','wie6qv7pe','tRGf04sM','RIuw'].join('');
+const db = getFirestore(initializeApp({
+  apiKey:_mk,
+  authDomain:"base-master-51391.firebaseapp.com",
+  projectId:"base-master-51391",
+  storageBucket:"base-master-51391.firebasestorage.app",
+  messagingSenderId:"236716794489",
+  appId:"1:236716794489:web:7975f64d63d276c0766aa8"
+}));
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window._db = db;
-window._leads = [];
-window._tasks = [];
-window._clientes = [];
-window._editingId = null;
-window._editingClienteId = null;
-
-window.STAGES = [
+window._leads=[];window._tasks=[];window._clientes=[];window._usuarios=[];
+window._editingId=null;window._editingClienteId=null;
+window.STAGES=[
   {id:'prospect',label:'Prospecto',color:'#5A6A88'},
   {id:'contato',label:'1º Contato',color:'#378ADD'},
   {id:'engajado',label:'Engajado',color:'#D4A033'},
@@ -411,356 +589,107 @@ window.STAGES = [
   {id:'proposta',label:'Proposta',color:'#8B82E0'},
   {id:'fechado',label:'Fechado',color:'#1D9E75'}
 ];
-window.SEG_L = {P:'Pequena',M:'Média',G:'Grande',EG:'Muito grande','?':''};
-window.SEG_T = {P:'tp',M:'tm',G:'tg',EG:'teg'};
-window.EST_T = {RS:'trs',SC:'tsc',PR:'tpr',RJ:'trj',SP:'tsp',MG:'tmg'};
+window.SEG_L={P:'Pequena',M:'Média',G:'Grande',EG:'Muito grande','?':''};
+window.SEG_T={P:'tp',M:'tm',G:'tg',EG:'teg'};
+window.EST_T={RS:'trs',SC:'tsc',PR:'tpr',RJ:'trj',SP:'tsp',MG:'tmg'};
 
-async function saveLead(l){ await setDoc(doc(db,'leads',String(l.id)),l); }
-async function delLead(id){ await deleteDoc(doc(db,'leads',String(id))); }
-async function saveTask(t){ await setDoc(doc(db,'tasks',String(t.id)),t); }
-async function delTask(id){ await deleteDoc(doc(db,'tasks',String(id))); }
-async function saveCliente(c){ await setDoc(doc(db,'clientes',String(c.id)),c); }
-async function delCliente(id){ await deleteDoc(doc(db,'clientes',String(id))); }
-
-window.saveLead=saveLead; window.delLead=delLead;
-window.saveTask=saveTask; window.delTask=delTask;
-window.saveClienteDB=saveCliente; window.delClienteDB=delCliente;
-
-// listeners em tempo real
-onSnapshot(collection(db,'leads'),(snap)=>{
-  window._leads=snap.docs.map(d=>d.data());
-  renderAll();
-  document.getElementById('loading').style.display='none';
-  setS('Sincronizado ✓');
+// Escrita APENAS no banco Master — nunca sincroniza de volta para o Evolua
+window.saveLead=async l=>setDoc(doc(db,'leads',String(l.id)),l);
+window.delLead=async id=>deleteDoc(doc(db,'leads',String(id)));
+window.saveTask=async t=>setDoc(doc(db,'tasks',String(t.id)),t);
+window.delTask=async id=>deleteDoc(doc(db,'tasks',String(id)));
+window.saveClienteDB=async c=>setDoc(doc(db,'clientes',String(c.id)),c);
+window.delClienteDB=async id=>deleteDoc(doc(db,'clientes',String(id)));
+window.saveUserDB=async u=>setDoc(doc(db,'usuarios',String(u.id)),u);
+window.delUserDB=async id=>deleteDoc(doc(db,'usuarios',String(id)));
+onSnapshot(collection(db,'leads'),snap=>{window._leads=snap.docs.map(d=>d.data());if(window._loggedIn){renderAll();}setS('Sincronizado ✓');});
+onSnapshot(collection(db,'tasks'),snap=>{window._tasks=snap.docs.map(d=>d.data());if(window._loggedIn)renderAgenda();});
+onSnapshot(collection(db,'clientes'),snap=>{window._clientes=snap.docs.map(d=>d.data());if(window._loggedIn)renderClientes();});
+onSnapshot(collection(db,'usuarios'),snap=>{
+  window._usuarios=snap.docs.map(d=>d.data());
+  if(window._usuarios.length===0)window.saveUserDB({id:'admin_tiago',user:'tiagoseltenreich',pass:'$1980Tiagus$',nome:'Tiago Seltenreich',role:'admin'});
+  if(window._loggedIn)renderUsuarios();
 });
-onSnapshot(collection(db,'tasks'),(snap)=>{ window._tasks=snap.docs.map(d=>d.data()); renderAgenda(); });
-onSnapshot(collection(db,'clientes'),(snap)=>{ window._clientes=snap.docs.map(d=>d.data()); renderClientes(); });
 
-// EXEC listeners
-window._execTarefasDB = [];
-window._execHistoricoDB = [];
-window.saveExecTarefa = async t => setDoc(doc(db,'exec_tarefas',String(t.id)),t);
-window.saveExecHistorico = async h => setDoc(doc(db,'exec_historico',String(h.id)),h);
-onSnapshot(collection(db,'exec_tarefas'),(snap)=>{
-  window._execTarefas=snap.docs.map(d=>d.data());
-  atualizarBadgeExec&&atualizarBadgeExec();
-  if(typeof renderExecucao==='function')renderExecucao();
-});
-onSnapshot(collection(db,'exec_historico'),(snap)=>{
-  window._execHistorico=snap.docs.map(d=>d.data());
-  if(typeof renderHistorico==='function')renderHistorico();
-});
+// SEED: 20 imobiliárias
+window._seedDone=false;
+async function seedImobiliarias(){
+  if(window._seedDone)return;
+  window._seedDone=true;
+  const snap=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(m=>m.getDocs(collection(db,'leads')));
+  const existentes=snap.docs.map(d=>d.data().nome);
+  const novas=[
+    {nome:'Imobiliária Pirâmide',cidade:'Joinville, SC',nomeContato:'Diretoria Geral',instagram:'@piramideimoveisjlle',site:'piramideimoveis.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Alternativa',cidade:'Blumenau, SC',nomeContato:'Ricardo Cubas',instagram:'@imobiliariaalternativa',site:'alternativabnu.com.br',fonte:'Indicação'},
+    {nome:'Dinâmica Imóveis',cidade:'Chapecó, SC',nomeContato:'Nelson Akimoto',instagram:'@dinamicaimoveischapeco',site:'dinamicaimoveis.co',fonte:'Indicação'},
+    {nome:'VIP Imob',cidade:'Criciúma, SC',nomeContato:'',instagram:'@vipimob',site:'vipimob.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Cidade Novo',cidade:'Jaraguá do Sul, SC',nomeContato:'',instagram:'@cidadenovoimoveis',site:'cidadenovo.com.br',fonte:'Indicação'},
+    {nome:'Casagrande Imóveis',cidade:'Lages, SC',nomeContato:'',instagram:'@casagrandeimoveislages',site:'casagrande-lages.com.br',fonte:'Indicação'},
+    {nome:'Traço Imóveis',cidade:'Tubarão, SC',nomeContato:'Júlio César',instagram:'@tracoimoveis',site:'tracoimoveis.com.br',fonte:'Indicação'},
+    {nome:'Ponto Inicial Imóveis',cidade:'Palhoça, SC',nomeContato:'',instagram:'@pontoinicialimoveis',site:'poinicial.com.br',fonte:'Indicação'},
+    {nome:'Mercado Imobiliário',cidade:'Itajaí, SC',nomeContato:'',instagram:'@mercadoimoveisitajai',site:'mercadoimoveis.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Franco',cidade:'Brusque, SC',nomeContato:'',instagram:'@francoimoveisbrusque',site:'francoimoveis.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Beltrão',cidade:'Maringá, PR',nomeContato:'Silvio Beltrão',instagram:'@imobiliariabeltrao',site:'imobiliariabeltrao.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária J. Parra',cidade:'Londrina, PR',nomeContato:'José Parra',instagram:'@jparraimoveis',site:'jparra.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Samburá',cidade:'Cascavel, PR',nomeContato:'',instagram:'@samburaimoveis',site:'samburaimoveis.com.br',fonte:'Indicação'},
+    {nome:'Adquira Imóveis',cidade:'Ponta Grossa, PR',nomeContato:'Lourival',instagram:'@adquiraimoveis',site:'adquiraimoveis.com.br',fonte:'Indicação'},
+    {nome:'Solos Incorporadora',cidade:'Foz do Iguaçu, PR',nomeContato:'',instagram:'@solosimoveis',site:'solosimoveis.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Kaza',cidade:'Guarapuava, PR',nomeContato:'',instagram:'@kazaguarapuava',site:'kazaguarapuava.com.br',fonte:'Indicação'},
+    {nome:'VIP Imóveis Toledo',cidade:'Toledo, PR',nomeContato:'',instagram:'@vipimoveistoledo',site:'vipimoveistoledo.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Novo Teto',cidade:'Apucarana, PR',nomeContato:'',instagram:'@novatetoimoveis',site:'novateto.com.br',fonte:'Indicação'},
+    {nome:'Delta Imóveis',cidade:'Umuarama, PR',nomeContato:'',instagram:'@deltaimoveisumuarama',site:'deltaumuarama.com.br',fonte:'Indicação'},
+    {nome:'Imobiliária Campagnolo',cidade:'Pato Branco, PR',nomeContato:'Vanderlei Campagnolo',instagram:'@campagnoloimoveis',site:'campagnoloimoveis.com.br',fonte:'Indicação'},
+  ];
+  for(const n of novas){
+    if(!existentes.includes(n.nome)){
+      await setDoc(doc(db,'leads','seed_'+n.nome.replace(/\s+/g,'_').toLowerCase()),{
+        id:'seed_'+n.nome.replace(/\s+/g,'_').toLowerCase(),
+        nome:n.nome,cidade:n.cidade,seg:'?',
+        nomeContato:n.nomeContato||'',contato:'',email:'',
+        instagram:n.instagram||'',site:n.site||'',
+        fonte:n.fonte,followup:'',notas:'',score:'',stage:'prospect'
+      });
+    }
+  }
+}
+// Roda seed uma vez após carregar
+setTimeout(()=>{import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(({getDocs})=>{getDocs(collection(db,'leads')).then(snap=>{const existentes=snap.docs.map(d=>d.data().nome);const novas=[{nome:'Imobiliária Pirâmide',cidade:'Joinville, SC',nomeContato:'',instagram:'@piramideimoveisjlle',site:'piramideimoveis.com.br'},{nome:'Imobiliária Alternativa',cidade:'Blumenau, SC',nomeContato:'Ricardo Cubas',instagram:'@imobiliariaalternativa',site:'alternativabnu.com.br'},{nome:'Dinâmica Imóveis',cidade:'Chapecó, SC',nomeContato:'Nelson Akimoto',instagram:'@dinamicaimoveischapeco',site:'dinamicaimoveis.co'},{nome:'VIP Imob',cidade:'Criciúma, SC',nomeContato:'',instagram:'@vipimob',site:'vipimob.com.br'},{nome:'Imobiliária Cidade Novo',cidade:'Jaraguá do Sul, SC',nomeContato:'',instagram:'@cidadenovoimoveis',site:'cidadenovo.com.br'},{nome:'Casagrande Imóveis',cidade:'Lages, SC',nomeContato:'',instagram:'@casagrandeimoveislages',site:'casagrande-lages.com.br'},{nome:'Traço Imóveis',cidade:'Tubarão, SC',nomeContato:'Júlio César',instagram:'@tracoimoveis',site:'tracoimoveis.com.br'},{nome:'Ponto Inicial Imóveis',cidade:'Palhoça, SC',nomeContato:'',instagram:'@pontoinicialimoveis',site:'poinicial.com.br'},{nome:'Mercado Imobiliário',cidade:'Itajaí, SC',nomeContato:'',instagram:'@mercadoimoveisitajai',site:'mercadoimoveis.com.br'},{nome:'Imobiliária Franco',cidade:'Brusque, SC',nomeContato:'',instagram:'@francoimoveisbrusque',site:'francoimoveis.com.br'},{nome:'Imobiliária Beltrão',cidade:'Maringá, PR',nomeContato:'Silvio Beltrão',instagram:'@imobiliariabeltrao',site:'imobiliariabeltrao.com.br'},{nome:'Imobiliária J. Parra',cidade:'Londrina, PR',nomeContato:'José Parra',instagram:'@jparraimoveis',site:'jparra.com.br'},{nome:'Imobiliária Samburá',cidade:'Cascavel, PR',nomeContato:'',instagram:'@samburaimoveis',site:'samburaimoveis.com.br'},{nome:'Adquira Imóveis',cidade:'Ponta Grossa, PR',nomeContato:'Lourival',instagram:'@adquiraimoveis',site:'adquiraimoveis.com.br'},{nome:'Solos Incorporadora',cidade:'Foz do Iguaçu, PR',nomeContato:'',instagram:'@solosimoveis',site:'solosimoveis.com.br'},{nome:'Imobiliária Kaza',cidade:'Guarapuava, PR',nomeContato:'',instagram:'@kazaguarapuava',site:'kazaguarapuava.com.br'},{nome:'VIP Imóveis Toledo',cidade:'Toledo, PR',nomeContato:'',instagram:'@vipimoveistoledo',site:'vipimoveistoledo.com.br'},{nome:'Imobiliária Novo Teto',cidade:'Apucarana, PR',nomeContato:'',instagram:'@novatetoimoveis',site:'novateto.com.br'},{nome:'Delta Imóveis',cidade:'Umuarama, PR',nomeContato:'',instagram:'@deltaimoveisumuarama',site:'deltaumuarama.com.br'},{nome:'Imobiliária Campagnolo',cidade:'Pato Branco, PR',nomeContato:'Vanderlei Campagnolo',instagram:'@campagnoloimoveis',site:'campagnoloimoveis.com.br'}];novas.forEach(n=>{if(!existentes.includes(n.nome)){setDoc(doc(db,'leads','seed_'+n.nome.replace(/[^a-z0-9]/gi,'_').toLowerCase()),{id:'seed_'+n.nome.replace(/[^a-z0-9]/gi,'_').toLowerCase(),nome:n.nome,cidade:n.cidade,seg:'?',nomeContato:n.nomeContato||'',contato:'',email:'',instagram:n.instagram||'',site:n.site||'',fonte:'Indicação',followup:'',notas:'',score:'',stage:'prospect'});}});});});},3000);
 </script>
 
 <script>
-function gid(){ return 'id'+Date.now()+'_'+Math.random().toString(36).substr(2,5); }
-function setS(t){ document.getElementById('sstatus').textContent=t; }
-function toast(m){ const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200); }
-function esc(s){ return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function estado(c){ if(!c)return''; const m={', RS':'RS',', SC':'SC',', PR':'PR',', RJ':'RJ',', SP':'SP',', MG':'MG'}; for(const[k,v]of Object.entries(m))if(c.toUpperCase().includes(k))return v; return''; }
-function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+const GEMINI_KEY='';
+let _aiProvider='claude';
+let _copyChannel='WhatsApp',_copyChannelModal='WhatsApp';
+let _prospLeads=[],_currentPerfil=null;
+window._loggedIn=false;window._currentUser=null;window._editingUserId=null;
+
+function gid(){return 'id'+Date.now()+'_'+Math.random().toString(36).substr(2,5);}
+function setS(t){const el=document.getElementById('sstatus');if(el)el.textContent=t;}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function estado(c){if(!c)return'';const m={', RS':'RS',', SC':'SC',', PR':'PR',', RJ':'RJ',', SP':'SP',', MG':'MG'};for(const[k,v]of Object.entries(m))if(c.toUpperCase().includes(k))return v;return'';}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function openModal(id){document.getElementById(id).classList.add('show');}
 [...document.querySelectorAll('.moverlay')].forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');}));
 
-// NAV
-let currentPage = 'dashboard';
-function nav(page, el){
-  currentPage = page;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',pipeline:'Pipeline SDR',agenda:'Agenda de Follow-up',cadencia:'Cadência de Abordagem',clientes:'Clientes Ativos',execucao:'Painel de Execução Diária',historico:'Histórico de Execução'};
-  document.getElementById('topbarTitle').textContent=titles[page]||page;
-  renderTopbarActions(page);
-  if(page==='dashboard')renderDashboard();
-  if(page==='pipeline')renderPipeline();
-  if(page==='agenda')renderAgenda();
-  if(page==='clientes')renderClientes();
-  if(page==='execucao')renderExecucao();
-  if(page==='historico')renderHistorico();
+// AI
+function setAI(p){
+  _aiProvider=p;
+  document.getElementById('btnClaude').classList.toggle('active',p==='claude');
+  document.getElementById('btnGemini').classList.toggle('active',p==='gemini');
+  toast(p==='claude'?'Usando Claude (Anthropic)':'Usando Gemini (Google — gratuito)');
 }
 
-function renderTopbarActions(page){
-  const el=document.getElementById('topbarActions');
-  if(page==='pipeline') el.innerHTML=`<button class="btn btn-gold" onclick="openModal('newLeadModal')"><i class="ti ti-plus"></i> Nova</button>`;
-  else if(page==='agenda') el.innerHTML=`<button class="btn btn-gold" onclick="openModal('newTaskModal')"><i class="ti ti-plus"></i> Tarefa</button>`;
-  else if(page==='clientes') el.innerHTML=`<button class="btn btn-gold" onclick="openNewCliente()"><i class="ti ti-plus"></i> Novo cliente</button>`;
-  else el.innerHTML='';
-}
-
-function openModal(id){ document.getElementById(id).classList.add('show'); }
-function renderAll(){ renderDashboard(); renderPipeline(); }
-
-// DASHBOARD
-function renderDashboard(){
-  const leads=window._leads||[];
-  const stages=window.STAGES||[];
-  const t=leads.length;
-  const byStage={};
-  stages.forEach(s=>byStage[s.id]=leads.filter(l=>l.stage===s.id).length);
-  const f=byStage['fechado']||0, p=byStage['proposta']||0, e=byStage['engajado']||0, d=byStage['diagnostico']||0;
-  const tx=t?Math.round(f/t*100):0;
-  const mrr=(window._clientes||[]).filter(c=>c.status==='ativo').reduce((s,c)=>s+(parseFloat(c.valor)||0),0);
-
-  document.getElementById('dashKpis').innerHTML=`
-    <div class="kpi"><div class="kpiv">${t}</div><div class="kpil">Total no pipeline</div></div>
-    <div class="kpi"><div class="kpiv cg">${e}</div><div class="kpil">Engajados</div></div>
-    <div class="kpi"><div class="kpiv cv">${f}</div><div class="kpil">Fechados</div></div>
-    <div class="kpi"><div class="kpiv cv">R$ ${mrr.toLocaleString('pt-BR')}</div><div class="kpil">MRR ativo</div></div>`;
-
-  // FUNIL
-  const maxCount = Math.max(...stages.map(s=>byStage[s.id]||0),1);
-  let funnelHTML='';
-  stages.forEach((s,i)=>{
-    const count=byStage[s.id]||0;
-    const prev=i>0?(byStage[stages[i-1].id]||0):null;
-    const conv=prev&&prev>0?Math.round(count/prev*100):null;
-    const pct=Math.max(Math.round(count/maxCount*100),8);
-    funnelHTML+=`
-      ${i>0?`<div class="funnel-arrow">↓ ${conv!==null?conv+'% conversão':'—'}</div>`:''}
-      <div class="funnel-stage">
-        <div class="funnel-label">${s.label}</div>
-        <div class="funnel-bar-wrap">
-          <div class="funnel-bar" style="width:${pct}%;background:${s.color}">${count}</div>
-        </div>
-      </div>`;
-  });
-  document.getElementById('funnel').innerHTML=funnelHTML;
-
-  // FONTES
-  const fontes={};
-  leads.forEach(l=>{ const f=l.fonte||'Outro'; fontes[f]=(fontes[f]||0)+1; });
-  const maxF=Math.max(...Object.values(fontes),1);
-  const sorted=Object.entries(fontes).sort((a,b)=>b[1]-a[1]);
-  document.getElementById('fonteList').innerHTML=sorted.map(([f,n])=>`
-    <div class="fonte-item">
-      <div class="fonte-name">${f}</div>
-      <div class="fonte-bar-wrap"><div class="fonte-bar" style="width:${Math.round(n/maxF*100)}%"></div></div>
-      <div class="fonte-num">${n}</div>
-    </div>`).join('');
-}
-
-// PIPELINE
-function renderPipeline(){
-  const leads=window._leads||[];
-  const stages=window.STAGES||[];
-  const q=(document.getElementById('busca')||{}).value?.toLowerCase()||'';
-  const seg=(document.getElementById('fseg')||{}).value||'';
-  const est=(document.getElementById('fest')||{}).value||'';
-  const list=leads.filter(l=>(!q||l.nome.toLowerCase().includes(q)||(l.cidade||'').toLowerCase().includes(q))&&(!seg||l.seg===seg)&&(!est||estado(l.cidade)===est));
-  document.getElementById('kanban').innerHTML=stages.map((s,si)=>{
-    const cards=list.filter(l=>l.stage===s.id);
-    const ch=cards.length?cards.map(l=>{
-      const est2=estado(l.cidade),showSeg=l.seg&&l.seg!=='?',hasTags=showSeg||est2||l.fonte;
-      return`<div class="card" onclick="openEdit('${l.id}')">
-        <div class="cnome">${esc(l.nome)}</div>
-        ${hasTags?`<div class="tags">${showSeg?`<span class="tag ${window.SEG_T[l.seg]}">${window.SEG_L[l.seg]}</span>`:''}${est2?`<span class="tag ${window.EST_T[est2]||''}">${est2}</span>`:''}${l.fonte?`<span class="tag tfonte">${esc(l.fonte)}</span>`:''}</div>`:''}
-        ${l.followup?`<div class="cfu">${esc(l.followup.length>55?l.followup.substring(0,55)+'…':l.followup)}</div>`:''}
-        <div class="cbtns">
-          ${si>0?`<button class="btn bsm" onclick="moveCard('${l.id}',-1,event)">← Voltar</button>`:''}
-          ${si<stages.length-1?`<button class="btn bsm" onclick="moveCard('${l.id}',1,event)">Avançar →</button>`:''}
-          <button class="btn bsm bdanger" onclick="delCard('${l.id}',event)"><i class="ti ti-trash"></i></button>
-        </div>
-      </div>`;
-    }).join(''):`<div class="empty"><i class="ti ti-inbox"></i>Vazio</div>`;
-    return`<div class="col"><div class="colh"><span class="coln" style="color:${s.color}">${s.label}</span><span class="colc">${cards.length}</span></div>${ch}</div>`;
-  }).join('');
-}
-
-async function moveCard(id,dir,e){
-  e.stopPropagation();
-  const l=(window._leads||[]).find(x=>x.id===id);
-  const stages=window.STAGES||[];
-  const i=stages.findIndex(s=>s.id===l.stage),n=stages[i+dir];
-  if(n){l.stage=n.id;await window.saveLead(l);}
-}
-
-function openEdit(id){
-  window._editingId=id;
-  const l=(window._leads||[]).find(x=>x.id===id);
-  document.getElementById('editTitle').textContent=l.nome;
-  document.getElementById('eNome').value=l.nome;
-  document.getElementById('eCidade').value=l.cidade||'';
-  document.getElementById('eSeg').value=l.seg;
-  document.getElementById('eContato').value=l.contato||'';
-  document.getElementById('eFonte').value=l.fonte||'Instagram';
-  document.getElementById('eFollowup').value=l.followup||'';
-  document.getElementById('eNotas').value=l.notas||'';
-  document.getElementById('eStages').innerHTML=(window.STAGES||[]).map(s=>`<button class="msb${l.stage===s.id?' cur':''}" onclick="setEditStage('${s.id}',this)">${s.label}</button>`).join('');
-  openModal('editModal');
-}
-
-function setEditStage(sid,btn){
-  document.querySelectorAll('#eStages .msb').forEach(b=>b.classList.remove('cur'));
-  btn.classList.add('cur');
-  const l=(window._leads||[]).find(x=>x.id===window._editingId);
-  if(l)l.stage=sid;
-}
-
-async function saveEdit(){
-  const l=(window._leads||[]).find(x=>x.id===window._editingId);
-  l.nome=document.getElementById('eNome').value.trim()||l.nome;
-  l.cidade=document.getElementById('eCidade').value.trim();
-  l.seg=document.getElementById('eSeg').value;
-  l.contato=document.getElementById('eContato').value.trim();
-  l.fonte=document.getElementById('eFonte').value;
-  l.followup=document.getElementById('eFollowup').value.trim();
-  l.notas=document.getElementById('eNotas').value.trim();
-  await window.saveLead(l);
-  closeModal('editModal');toast('Salvo ✓');
-}
-
-async function deleteFromModal(){
-  if(!confirm('Remover?'))return;
-  await window.delLead(window._editingId);
-  closeModal('editModal');toast('Removido');
-}
-
-async function delCard(id,e){
-  e.stopPropagation();
-  if(!confirm('Remover?'))return;
-  await window.delLead(id);toast('Removido');
-}
-
-async function saveNewLead(){
-  const nome=document.getElementById('nNome').value.trim();
-  if(!nome){alert('Informe o nome');return;}
-  const lead={id:gid(),nome,cidade:document.getElementById('nCidade').value.trim(),seg:document.getElementById('nSeg').value,contato:document.getElementById('nContato').value.trim(),fonte:document.getElementById('nFonte').value,followup:document.getElementById('nFollowup').value.trim(),notas:document.getElementById('nNotas').value.trim(),stage:document.getElementById('nStage').value};
-  await window.saveLead(lead);
-  closeModal('newLeadModal');toast('Adicionado ✓');
-  ['nNome','nCidade','nContato','nFollowup','nNotas'].forEach(i=>document.getElementById(i).value='');
-}
-
-// AGENDA
-function renderAgenda(){
-  const tasks=window._tasks||[];
-  if(!document.getElementById('agendaContent'))return;
-  const sorted=[...tasks].sort((a,b)=>a.date>b.date?1:-1);
-  const today=new Date().toISOString().split('T')[0];
-  const groups={};
-  sorted.forEach(t=>{const d=t.date||'sem-data';if(!groups[d])groups[d]=[];groups[d].push(t);});
-  if(sorted.length===0){
-    document.getElementById('agendaContent').innerHTML=`<div class="placeholder"><i class="ti ti-calendar"></i><h3>Nenhuma tarefa</h3><p>Adicione tarefas de follow-up para não perder oportunidades.</p></div>`;
-    return;
+async function callAI(prompt, jsonMode=false){
+  if(_aiProvider==='gemini'){
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
+    const data=await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+  } else {
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:prompt}],jsonMode})});
+    const data=await res.json();
+    return data.content?.map(i=>i.text||'').join('')||'';
   }
-  let html='';
-  for(const[date,items] of Object.entries(groups)){
-    const label=date==='sem-data'?'Sem data':date===today?'Hoje':date;
-    html+=`<div class="date-group">${label}</div><div class="agenda-list">`;
-    items.forEach(t=>{
-      html+=`<div class="task-item">
-        <div class="task-check${t.done?' done':''}" onclick="toggleTask('${t.id}')"></div>
-        <div class="task-body">
-          <div class="task-title${t.done?' done':''}">${esc(t.desc)}</div>
-          ${t.ctx?`<div class="task-meta">${esc(t.ctx)}</div>`:''}
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <div class="task-date">${t.date||''}</div>
-          <button class="btn bsm bdanger" onclick="removeTask('${t.id}')"><i class="ti ti-trash"></i></button>
-        </div>
-      </div>`;
-    });
-    html+='</div>';
-  }
-  document.getElementById('agendaContent').innerHTML=html;
-}
-
-async function saveNewTask(){
-  const desc=document.getElementById('tDesc').value.trim();
-  if(!desc){alert('Informe a descrição');return;}
-  const task={id:gid(),desc,ctx:document.getElementById('tCtx').value.trim(),date:document.getElementById('tDate').value,done:false};
-  await window.saveTask(task);
-  closeModal('newTaskModal');toast('Tarefa adicionada ✓');
-  ['tDesc','tCtx','tDate'].forEach(i=>document.getElementById(i).value='');
-}
-
-async function toggleTask(id){
-  const t=(window._tasks||[]).find(x=>x.id===id);
-  if(t){t.done=!t.done;await window.saveTask(t);}
-}
-
-async function removeTask(id){
-  if(!confirm('Remover tarefa?'))return;
-  await window.delTask(id);toast('Removido');
-}
-
-// CLIENTES
-function renderClientes(){
-  const clientes=window._clientes||[];
-  if(!document.getElementById('clientesContent'))return;
-  if(clientes.length===0){
-    document.getElementById('clientesContent').innerHTML=`<div class="placeholder"><i class="ti ti-building"></i><h3>Nenhum cliente ativo</h3><p>Adicione clientes com contratos em andamento.</p></div>`;
-    return;
-  }
-  const today=new Date();
-  const sorted=[...clientes].sort((a,b)=>a.inicio>b.inicio?1:-1);
-  const rows=sorted.map(c=>{
-    const inicio=c.inicio?new Date(c.inicio):null;
-    const meses=parseInt(c.plano)||3;
-    const venc=inicio?new Date(inicio.setMonth(inicio.getMonth()+meses)):null;
-    const vencStr=venc?venc.toLocaleDateString('pt-BR'):'—';
-    const diasRestantes=venc?Math.round((venc-today)/(1000*60*60*24)):null;
-    let vencClass='';
-    if(diasRestantes!==null&&diasRestantes<=0)vencClass='vence-hoje';
-    else if(diasRestantes!==null&&diasRestantes<=30)vencClass='vence-breve';
-    const badge=c.status==='ativo'?'s-ativo':c.status==='risco'?'s-risco':'s-encerrado';
-    const label=c.status==='ativo'?'Ativo':c.status==='risco'?'Em risco':'Encerrado';
-    return`<tr onclick="openEditCliente('${c.id}')">
-      <td style="color:var(--text);font-weight:500">${esc(c.nome)}</td>
-      <td>${c.plano} meses</td>
-      <td>R$ ${parseFloat(c.valor||0).toLocaleString('pt-BR')}</td>
-      <td>${c.inicio?new Date(c.inicio+'T00:00:00').toLocaleDateString('pt-BR'):'—'}</td>
-      <td class="${vencClass}">${vencStr}${diasRestantes!==null&&diasRestantes>0?` (${diasRestantes}d)`:''}</td>
-      <td><span class="status-badge ${badge}">${label}</span></td>
-      <td style="color:var(--text3);font-size:12px">${esc(c.obs||'')}</td>
-    </tr>`;
-  }).join('');
-  document.getElementById('clientesContent').innerHTML=`
-    <table class="clientes-table">
-      <thead><tr><th>Imobiliária</th><th>Plano</th><th>Valor/mês</th><th>Início</th><th>Vencimento</th><th>Status</th><th>Observações</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
-}
-
-function openNewCliente(){
-  window._editingClienteId=null;
-  document.getElementById('clienteModalTitle').textContent='Novo cliente ativo';
-  document.getElementById('cBtnDel').style.display='none';
-  ['cNome','cObs'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('cValor').value='';
-  document.getElementById('cInicio').value='';
-  document.getElementById('cPlano').value='6';
-  document.getElementById('cStatus').value='ativo';
-  openModal('newClienteModal');
-}
-
-function openEditCliente(id){
-  const c=(window._clientes||[]).find(x=>x.id===id);
-  window._editingClienteId=id;
-  document.getElementById('clienteModalTitle').textContent='Editar cliente';
-  document.getElementById('cBtnDel').style.display='inline-flex';
-  document.getElementById('cNome').value=c.nome||'';
-  document.getElementById('cValor').value=c.valor||'';
-  document.getElementById('cInicio').value=c.inicio||'';
-  document.getElementById('cPlano').value=c.plano||'6';
-  document.getElementById('cStatus').value=c.status||'ativo';
-  document.getElementById('cObs').value=c.obs||'';
-  openModal('newClienteModal');
-}
-
-async function saveCliente(){
-  const nome=document.getElementById('cNome').value.trim();
-  if(!nome){alert('Informe o nome');return;}
-  const id=window._editingClienteId||gid();
-  const c={id,nome,plano:document.getElementById('cPlano').value,valor:document.getElementById('cValor').value,inicio:document.getElementById('cInicio').value,status:document.getElementById('cStatus').value,obs:document.getElementById('cObs').value.trim()};
-  await window.saveClienteDB(c);
-  closeModal('newClienteModal');toast('Salvo ✓');
-}
-
-async function deleteCliente(){
-  if(!confirm('Remover cliente?'))return;
-  await window.delClienteDB(window._editingClienteId);
-  closeModal('newClienteModal');toast('Removido');
 }
 
 // LOGIN
@@ -769,15 +698,18 @@ function doLogin(){
   const pass=document.getElementById('loginPass').value;
   const err=document.getElementById('loginErr');
   if(!user||!pass){err.textContent='Preencha usuário e senha';return;}
-  const USERS=[{user:'tiagoseltenreich',pass:'$1980Tiagus$',nome:'Tiago Seltenreich'}];
-  const found=USERS.find(u=>u.user===user&&u.pass===pass);
+  const all=[{user:'tiagoseltenreich',pass:'$1980Tiagus$',nome:'Tiago Seltenreich',role:'admin'},...(window._usuarios||[])];
+  const found=all.find(u=>u.user===user&&u.pass===pass);
   if(found){
+    window._loggedIn=true;window._currentUser=found;
     document.getElementById('loginWrap').style.display='none';
+    document.getElementById('loading').style.display='none';
     document.getElementById('appSidebar').style.display='flex';
     document.getElementById('appMain').style.display='flex';
-    err.textContent='';
+    document.getElementById('sbUsername').textContent=found.nome||found.user;
+    document.querySelectorAll('.admin-only').forEach(el=>el.style.display=found.role==='admin'?'flex':'none');
     renderDashboard();renderPipeline();renderAgenda();renderClientes();
-    setTimeout(()=>atualizarBadgeExec&&atualizarBadgeExec(),500);
+    err.textContent='';
   } else {
     err.textContent='Usuário ou senha incorretos';
     document.getElementById('loginPass').value='';
@@ -785,25 +717,798 @@ function doLogin(){
 }
 
 function doLogout(){
+  window._loggedIn=false;window._currentUser=null;
   document.getElementById('loginWrap').style.display='flex';
   document.getElementById('appSidebar').style.display='none';
   document.getElementById('appMain').style.display='none';
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
+  document.getElementById('loginUser').value='';document.getElementById('loginPass').value='';
 }
 
-// CADÊNCIA PADRÃO (necessária para gerarExecucaoIA)
+// NAV
+let currentPage='dashboard';
+function nav(page,el){
+  currentPage=page;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  if(el)el.classList.add('active');
+  const titles={dashboard:'Dashboard',pipeline:'Pipeline SDR',agenda:'Agenda de Follow-up',cadencia:'Cadência de Abordagem',prospeccao:'Prospecção IA',qualificacao:'Qualificação IA',cadenciauto:'Cadência Automática',agentes:'Agentes IA',clientes:'Clientes Ativos',config:'Configurações',usuarios:'Usuários'};
+  document.getElementById('topbarTitle').textContent=titles[page]||page;
+  const ta=document.getElementById('topbarActions');
+  const aiSel=`<div class="ai-selector"><span class="ai-sel-label">IA:</span><button class="ai-sel-btn${_aiProvider==='claude'?' active':''}" id="btnClaude" onclick="setAI('claude')">Claude</button><button class="ai-sel-btn gemini${_aiProvider==='gemini'?' active':''}" id="btnGemini" onclick="setAI('gemini')">Gemini</button></div>`;
+  if(page==='pipeline')ta.innerHTML=`${aiSel}<button class="btn btn-gold" onclick="openModal('newLeadModal')"><i class="ti ti-plus"></i> Nova</button>`;
+  else if(page==='agenda')ta.innerHTML=`${aiSel}<button class="btn btn-gold" onclick="openModal('newTaskModal')"><i class="ti ti-plus"></i> Tarefa</button>`;
+  else if(page==='clientes')ta.innerHTML=`${aiSel}<button class="btn btn-gold" onclick="openNewCliente()"><i class="ti ti-plus"></i> Novo cliente</button>`;
+  else if(page==='usuarios')ta.innerHTML=`${aiSel}<button class="btn btn-gold" onclick="openNewUser()"><i class="ti ti-plus"></i> Novo usuário</button>`;
+  else ta.innerHTML=aiSel;
+  if(page==='dashboard')renderDashboard();
+  if(page==='pipeline')renderPipeline();
+  if(page==='agenda')renderAgenda();
+  if(page==='clientes')renderClientes();
+  if(page==='cadencia')renderCadencia();
+  if(page==='agentes')renderAgentes();
+  if(page==='usuarios')renderUsuarios();
+  if(page==='qualificacao')renderQualificacao();
+  if(page==='cadenciauto')renderCadenciauto();
+  if(page==='config')renderConfig();
+}
+
+function renderAll(){renderDashboard();renderPipeline();}
+
+// DASHBOARD
+function renderDashboard(){
+  const leads=window._leads||[],stages=window.STAGES||[];
+  const byStage={};stages.forEach(s=>byStage[s.id]=leads.filter(l=>l.stage===s.id).length);
+  const f=byStage['fechado']||0,e=byStage['engajado']||0,t=leads.length;
+  const mrr=(window._clientes||[]).filter(c=>c.status==='ativo').reduce((s,c)=>s+(parseFloat(c.valor)||0),0);
+  document.getElementById('dashKpis').innerHTML=`<div class="kpi"><div class="kpiv">${t}</div><div class="kpil">Total no pipeline</div></div><div class="kpi"><div class="kpiv cg">${e}</div><div class="kpil">Engajados</div></div><div class="kpi"><div class="kpiv cv">${f}</div><div class="kpil">Fechados</div></div><div class="kpi"><div class="kpiv cv">R$ ${mrr.toLocaleString('pt-BR')}</div><div class="kpil">MRR ativo</div></div>`;
+  const maxC=Math.max(...stages.map(s=>byStage[s.id]||0),1);
+  let fh='';
+  stages.forEach((s,i)=>{
+    const c=byStage[s.id]||0,prev=i>0?(byStage[stages[i-1].id]||0):null;
+    const conv=prev&&prev>0?Math.round(c/prev*100):null;
+    fh+=`${i>0?`<div class="funnel-arrow">↓ ${conv!==null?conv+'% conversão':'—'}</div>`:''}
+    <div class="funnel-stage"><div class="funnel-label">${s.label}</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${Math.max(Math.round(c/maxC*100),8)}%;background:${s.color}">${c}</div></div></div>`;
+  });
+  document.getElementById('funnel').innerHTML=fh;
+  const fontes={};leads.forEach(l=>{const f=l.fonte||'Outro';fontes[f]=(fontes[f]||0)+1;});
+  const maxF=Math.max(...Object.values(fontes),1);
+  document.getElementById('fonteList').innerHTML=Object.entries(fontes).sort((a,b)=>b[1]-a[1]).map(([f,n])=>`<div class="fonte-item"><div class="fonte-name">${f}</div><div class="fonte-bar-wrap"><div class="fonte-bar" style="width:${Math.round(n/maxF*100)}%"></div></div><div class="fonte-num">${n}</div></div>`).join('')||'<div style="font-size:12px;color:var(--text3)">Nenhum lead</div>';
+  document.getElementById('aiFeed').innerHTML=[
+    {type:'hunt',icon:'ti-radar',text:'Hunter Agent identificou 3 novas imobiliárias em Porto Alegre',time:'agora'},
+    {type:'enrich',icon:'ti-database',text:'Enrichment Agent atualizou score de 5 leads',time:'5m'},
+    {type:'msg',icon:'ti-message',text:'SDR Agent enviou follow-up — Imobiliária Central (Dia 4)',time:'12m'},
+    {type:'move',icon:'ti-arrows-right',text:'Lead Horizonte Imóveis movido para Engajado',time:'1h'},
+  ].map(f=>`<div class="ai-feed-item"><div class="ai-feed-icon ${f.type}"><i class="ti ${f.icon}"></i></div><div class="ai-feed-text">${f.text}</div><div class="ai-feed-time">${f.time}</div></div>`).join('');
+  document.getElementById('aiKpis').innerHTML=`<div class="kpi" style="padding:10px 12px"><div class="kpiv cai" style="font-size:22px">—</div><div class="kpil">Encontradas</div></div><div class="kpi" style="padding:10px 12px"><div class="kpiv cb" style="font-size:22px">—</div><div class="kpil">Msgs enviadas</div></div><div class="kpi" style="padding:10px 12px"><div class="kpiv cv" style="font-size:22px">—</div><div class="kpil">Reuniões</div></div><div class="kpi" style="padding:10px 12px"><div class="kpiv co" style="font-size:22px">—</div><div class="kpil">Taxa resposta</div></div>`;
+
+  // PENDÊNCIAS
+  const pendentes=leads.filter(l=>getCamposFaltando(l).length>0);
+  const pendEl=document.getElementById('dashPendentes');
+  if(pendEl){
+    if(!pendentes.length){
+      pendEl.innerHTML='<div style="font-size:12px;color:var(--success);display:flex;align-items:center;gap:5px"><i class="ti ti-circle-check"></i> Todos os leads estão completos</div>';
+    } else {
+      pendEl.innerHTML=pendentes.slice(0,8).map(l=>{
+        const falta=getCamposFaltando(l);
+        return`<div onclick="openEdit('${l.id}')" style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--navy3);border-radius:6px;border:1px solid var(--border);cursor:pointer;margin-bottom:5px">
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--text)">${esc(l.nome)}</div>
+            <div style="font-size:10px;color:var(--text3);margin-top:1px">${esc(l.cidade||'—')}</div>
+          </div>
+          <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end;max-width:60%">
+            ${falta.map(f=>`<span style="font-size:10px;padding:1px 5px;border-radius:4px;background:rgba(224,96,48,.12);color:#E06030;border:1px solid rgba(224,96,48,.2)">${f}</span>`).join('')}
+          </div>
+        </div>`;
+      }).join('')+(pendentes.length>8?`<div style="font-size:11px;color:var(--text3);text-align:center;padding-top:4px">+${pendentes.length-8} outros</div>`:'');
+    }
+  }
+}
+
+// PIPELINE
+function renderPipeline(){
+  const leads=window._leads||[],stages=window.STAGES||[];
+  const q=(document.getElementById('busca')||{}).value?.toLowerCase()||'';
+  const seg=(document.getElementById('fseg')||{}).value||'';
+  const est=(document.getElementById('fest')||{}).value||'';
+  const list=leads.filter(l=>(!q||l.nome.toLowerCase().includes(q)||(l.cidade||'').toLowerCase().includes(q))&&(!seg||l.seg===seg)&&(!est||estado(l.cidade)===est));
+  document.getElementById('kanban').innerHTML=stages.map((s,si)=>{
+    const cards=list.filter(l=>l.stage===s.id);
+    const ch=cards.length?cards.map(l=>{
+      const est2=estado(l.cidade),showSeg=l.seg&&l.seg!=='?',hasTags=showSeg||est2||l.fonte;
+      const falta=getCamposFaltando(l);
+      const alertIcon=falta.length?`<span title="Incompleto: ${falta.join(', ')}" style="display:inline-flex;align-items:center;gap:2px;font-size:10px;padding:1px 5px;border-radius:4px;background:rgba(224,96,48,.15);color:#E06030;border:1px solid rgba(224,96,48,.2);cursor:help"><i class="ti ti-alert-circle" style="font-size:11px"></i>${falta.length}</span>`:'';
+      return`<div class="card${l.fonte&&l.fonte.includes('IA')?' ai-lead':''}" onclick="openEdit('${l.id}')">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:4px">
+          <div class="cnome" style="margin-bottom:0">${esc(l.nome)}</div>
+          ${alertIcon}
+        </div>
+        ${hasTags?`<div class="tags">${showSeg?`<span class="tag ${window.SEG_T[l.seg]}">${window.SEG_L[l.seg]}</span>`:''}${est2?`<span class="tag ${window.EST_T[est2]||''}">${est2}</span>`:''}${l.score?`<span class="tag tai">Score ${l.score}</span>`:''}${l.fonte?`<span class="tag tfonte">${esc(l.fonte)}</span>`:''}</div>`:''}
+        ${l.followup?`<div class="cfu">${esc(l.followup.length>55?l.followup.substring(0,55)+'…':l.followup)}</div>`:''}
+        <div class="cbtns">
+          ${si>0?`<button class="btn bsm" onclick="moveCard('${l.id}',-1,event)">← Voltar</button>`:''}
+          ${si<stages.length-1?`<button class="btn bsm" onclick="moveCard('${l.id}',1,event)">Avançar →</button>`:''}
+          <button class="btn bsm btn-ai" onclick="openCopyDirect('${l.id}',event)" title="Gerar abordagem"><i class="ti ti-sparkles"></i></button>
+          <button class="btn bsm bdanger" onclick="delCard('${l.id}',event)"><i class="ti ti-trash"></i></button>
+        </div>
+      </div>`;
+    }).join(''):`<div class="empty"><i class="ti ti-inbox"></i>Vazio</div>`;
+    return`<div class="col"><div class="colh"><span class="coln" style="color:${s.color}">${s.label}</span><span class="colc">${cards.length}</span></div>${ch}</div>`;
+  }).join('');
+}
+
+async function moveCard(id,dir,e){e.stopPropagation();const l=(window._leads||[]).find(x=>x.id===id);const stages=window.STAGES||[];const i=stages.findIndex(s=>s.id===l.stage),n=stages[i+dir];if(n){l.stage=n.id;await window.saveLead(l);}}
+
+function getCamposFaltando(l){
+  const falta=[];
+  if(!l.nome)falta.push('Nome');
+  if(!l.cidade)falta.push('Cidade');
+  if(!l.nomeContato)falta.push('Contato');
+  if(!l.contato)falta.push('Telefone');
+  if(!l.email)falta.push('E-mail');
+  if(!l.followup)falta.push('Follow-up');
+  return falta;
+}
+
+function renderEditAlerts(l){
+  const falta=getCamposFaltando(l);
+  const el=document.getElementById('editAlerts');
+  if(!falta.length){el.innerHTML='<span style="font-size:11px;color:var(--success);display:flex;align-items:center;gap:3px"><i class="ti ti-circle-check"></i> Completo</span>';return;}
+  el.innerHTML=falta.map(f=>`<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(224,96,48,.15);color:#E06030;border:1px solid rgba(224,96,48,.25)">${f}</span>`).join('');
+}
+
+function openEdit(id){
+  window._editingId=id;const l=(window._leads||[]).find(x=>x.id===id);
+  document.getElementById('editTitle').textContent=l.nome;
+  document.getElementById('eNome').value=l.nome||'';
+  document.getElementById('eCidade').value=l.cidade||'';
+  document.getElementById('eSeg').value=l.seg||'?';
+  document.getElementById('eNomeContato').value=l.nomeContato||'';
+  document.getElementById('eContato').value=l.contato||'';
+  document.getElementById('eEmail').value=l.email||'';
+  document.getElementById('eInstagram').value=l.instagram||'';
+  document.getElementById('eSite').value=l.site||'';
+  document.getElementById('eFonte').value=l.fonte||'Instagram';
+  document.getElementById('eFollowup').value=l.followup||'';
+  document.getElementById('eNotas').value=l.notas||'';
+  document.getElementById('eScore').value=l.score||'';
+  document.getElementById('eStages').innerHTML=(window.STAGES||[]).map(s=>`<button class="msb${l.stage===s.id?' cur':''}" onclick="setEditStage('${s.id}',this)">${s.label}</button>`).join('');
+  renderEditAlerts(l);
+  openModal('editModal');
+}
+
+function setEditStage(sid,btn){document.querySelectorAll('#eStages .msb').forEach(b=>b.classList.remove('cur'));btn.classList.add('cur');const l=(window._leads||[]).find(x=>x.id===window._editingId);if(l)l.stage=sid;}
+
+async function saveEdit(){
+  const l=(window._leads||[]).find(x=>x.id===window._editingId);
+  l.nome=document.getElementById('eNome').value.trim()||l.nome;
+  l.cidade=document.getElementById('eCidade').value.trim();
+  l.seg=document.getElementById('eSeg').value;
+  l.nomeContato=document.getElementById('eNomeContato').value.trim();
+  l.contato=document.getElementById('eContato').value.trim();
+  l.email=document.getElementById('eEmail').value.trim();
+  l.instagram=document.getElementById('eInstagram').value.trim();
+  l.site=document.getElementById('eSite').value.trim();
+  l.fonte=document.getElementById('eFonte').value;
+  l.followup=document.getElementById('eFollowup').value.trim();
+  l.notas=document.getElementById('eNotas').value.trim();
+  l.score=document.getElementById('eScore').value;
+  await window.saveLead(l);closeModal('editModal');toast('Salvo ✓');
+}
+
+async function deleteFromModal(){if(!confirm('Remover?'))return;await window.delLead(window._editingId);closeModal('editModal');toast('Removido');}
+async function delCard(id,e){e.stopPropagation();if(!confirm('Remover?'))return;await window.delLead(id);toast('Removido');}
+
+async function saveNewLead(){
+  const nome=document.getElementById('nNome').value.trim();if(!nome){alert('Informe o nome');return;}
+  await window.saveLead({id:gid(),nome,
+    cidade:document.getElementById('nCidade').value.trim(),
+    seg:document.getElementById('nSeg').value,
+    nomeContato:document.getElementById('nNomeContato').value.trim(),
+    contato:document.getElementById('nContato').value.trim(),
+    email:document.getElementById('nEmail').value.trim(),
+    instagram:document.getElementById('nInstagram').value.trim(),
+    site:document.getElementById('nSite').value.trim(),
+    fonte:document.getElementById('nFonte').value,
+    followup:document.getElementById('nFollowup').value.trim(),
+    notas:document.getElementById('nNotas').value.trim(),
+    stage:document.getElementById('nStage').value});
+  closeModal('newLeadModal');toast('Adicionado ✓');
+  ['nNome','nCidade','nNomeContato','nContato','nEmail','nInstagram','nSite','nFollowup','nNotas'].forEach(i=>document.getElementById(i).value='');
+}
+
+// AGENDA
+function renderAgenda(){
+  const tasks=window._tasks||[];if(!document.getElementById('agendaContent'))return;
+  const sorted=[...tasks].sort((a,b)=>a.date>b.date?1:-1);
+  const today=new Date().toISOString().split('T')[0];
+  const groups={};sorted.forEach(t=>{const d=t.date||'sem-data';if(!groups[d])groups[d]=[];groups[d].push(t);});
+  if(!sorted.length){document.getElementById('agendaContent').innerHTML=`<div class="placeholder"><i class="ti ti-calendar"></i><h3>Nenhuma tarefa</h3><p>Adicione tarefas de follow-up.</p></div>`;return;}
+  let html='';
+  for(const[date,items] of Object.entries(groups)){
+    html+=`<div class="date-group">${date==='sem-data'?'Sem data':date===today?'Hoje':date}</div><div class="agenda-list">`;
+    items.forEach(t=>{html+=`<div class="task-item"><div class="task-check${t.done?' done':''}" onclick="toggleTask('${t.id}')"></div><div class="task-body"><div class="task-title${t.done?' done':''}">${esc(t.desc)}</div>${t.ctx?`<div class="task-meta">${esc(t.ctx)}</div>`:''}</div><div style="display:flex;align-items:center;gap:6px"><div class="task-date">${t.date||''}</div><button class="btn bsm bdanger" onclick="removeTask('${t.id}')"><i class="ti ti-trash"></i></button></div></div>`;});
+    html+='</div>';
+  }
+  document.getElementById('agendaContent').innerHTML=html;
+}
+
+async function saveNewTask(){const desc=document.getElementById('tDesc').value.trim();if(!desc){alert('Informe a descrição');return;}await window.saveTask({id:gid(),desc,ctx:document.getElementById('tCtx').value.trim(),date:document.getElementById('tDate').value,done:false});closeModal('newTaskModal');toast('Tarefa adicionada ✓');['tDesc','tCtx','tDate'].forEach(i=>document.getElementById(i).value='');}
+async function toggleTask(id){const t=(window._tasks||[]).find(x=>x.id===id);if(t){t.done=!t.done;await window.saveTask(t);}}
+async function removeTask(id){if(!confirm('Remover?'))return;await window.delTask(id);toast('Removido');}
+
+// CLIENTES
+function renderClientes(){
+  const clientes=window._clientes||[];if(!document.getElementById('clientesContent'))return;
+  if(!clientes.length){document.getElementById('clientesContent').innerHTML=`<div class="placeholder"><i class="ti ti-building"></i><h3>Nenhum cliente ativo</h3></div>`;return;}
+  const today=new Date();
+  const rows=[...clientes].sort((a,b)=>a.inicio>b.inicio?1:-1).map(c=>{
+    const venc=c.inicio?new Date(new Date(c.inicio).setMonth(new Date(c.inicio).getMonth()+(parseInt(c.plano)||3))):null;
+    const dias=venc?Math.round((venc-today)/(1000*60*60*24)):null;
+    const vc=dias!==null&&dias<=0?'vence-hoje':dias!==null&&dias<=30?'vence-breve':'';
+    const badge=c.status==='ativo'?'s-ativo':c.status==='risco'?'s-risco':'s-encerrado';
+    return`<tr onclick="openEditCliente('${c.id}')"><td style="color:var(--text);font-weight:500">${esc(c.nome)}</td><td>${c.plano} meses</td><td>R$ ${parseFloat(c.valor||0).toLocaleString('pt-BR')}</td><td>${c.inicio?new Date(c.inicio+'T00:00:00').toLocaleDateString('pt-BR'):'—'}</td><td class="${vc}">${venc?venc.toLocaleDateString('pt-BR'):'—'}${dias!==null&&dias>0?` (${dias}d)`:''}</td><td><span class="status-badge ${badge}">${c.status==='ativo'?'Ativo':c.status==='risco'?'Em risco':'Encerrado'}</span></td><td style="font-size:12px;color:var(--text3)">${esc(c.obs||'')}</td></tr>`;
+  }).join('');
+  document.getElementById('clientesContent').innerHTML=`<table class="data-table"><thead><tr><th>Imobiliária</th><th>Plano</th><th>Valor/mês</th><th>Início</th><th>Vencimento</th><th>Status</th><th>Obs</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function openNewCliente(){window._editingClienteId=null;document.getElementById('clienteModalTitle').textContent='Novo cliente ativo';document.getElementById('cBtnDel').style.display='none';['cNome','cObs'].forEach(i=>document.getElementById(i).value='');document.getElementById('cValor').value='';document.getElementById('cInicio').value='';document.getElementById('cPlano').value='6';document.getElementById('cStatus').value='ativo';openModal('newClienteModal');}
+function openEditCliente(id){const c=(window._clientes||[]).find(x=>x.id===id);window._editingClienteId=id;document.getElementById('clienteModalTitle').textContent='Editar cliente';document.getElementById('cBtnDel').style.display='inline-flex';document.getElementById('cNome').value=c.nome||'';document.getElementById('cValor').value=c.valor||'';document.getElementById('cInicio').value=c.inicio||'';document.getElementById('cPlano').value=c.plano||'6';document.getElementById('cStatus').value=c.status||'ativo';document.getElementById('cObs').value=c.obs||'';openModal('newClienteModal');}
+async function saveCliente(){const nome=document.getElementById('cNome').value.trim();if(!nome){alert('Informe o nome');return;}const id=window._editingClienteId||gid();await window.saveClienteDB({id,nome,plano:document.getElementById('cPlano').value,valor:document.getElementById('cValor').value,inicio:document.getElementById('cInicio').value,status:document.getElementById('cStatus').value,obs:document.getElementById('cObs').value.trim()});closeModal('newClienteModal');toast('Salvo ✓');}
+async function deleteCliente(){if(!confirm('Remover?'))return;await window.delClienteDB(window._editingClienteId);closeModal('newClienteModal');toast('Removido');}
+
+// USUÁRIOS
+function renderUsuarios(){
+  const usuarios=window._usuarios||[];if(!document.getElementById('usuariosContent'))return;
+  if(!usuarios.length){document.getElementById('usuariosContent').innerHTML=`<div class="placeholder"><i class="ti ti-users"></i><h3>Nenhum usuário cadastrado</h3></div>`;return;}
+  document.getElementById('usuariosContent').innerHTML=`<table class="data-table"><thead><tr><th>Usuário</th><th>Nome</th><th>Perfil</th><th>Ação</th></tr></thead><tbody>${usuarios.map(u=>`<tr><td style="color:var(--text);font-weight:500">${esc(u.user)}</td><td>${esc(u.nome||'—')}</td><td><span class="role-badge ${u.role==='admin'?'role-admin':'role-user'}">${u.role==='admin'?'Admin':'Usuário'}</span></td><td><button class="btn bsm" onclick="openEditUser('${u.id}')"><i class="ti ti-pencil"></i> Editar</button></td></tr>`).join('')}</tbody></table>`;
+}
+
+function openNewUser(){window._editingUserId=null;document.getElementById('userModalTitle').textContent='Novo usuário';document.getElementById('uBtnDel').style.display='none';['uUser','uPass','uNome'].forEach(i=>document.getElementById(i).value='');document.getElementById('uRole').value='user';openModal('newUserModal');}
+function openEditUser(id){const u=(window._usuarios||[]).find(x=>x.id===id);window._editingUserId=id;document.getElementById('userModalTitle').textContent='Editar usuário';document.getElementById('uBtnDel').style.display='inline-flex';document.getElementById('uUser').value=u.user||'';document.getElementById('uPass').value=u.pass||'';document.getElementById('uNome').value=u.nome||'';document.getElementById('uRole').value=u.role||'user';openModal('newUserModal');}
+async function saveUser(){const user=document.getElementById('uUser').value.trim(),pass=document.getElementById('uPass').value.trim();if(!user||!pass){alert('Preencha usuário e senha');return;}const id=window._editingUserId||gid();await window.saveUserDB({id,user,pass,nome:document.getElementById('uNome').value.trim(),role:document.getElementById('uRole').value});closeModal('newUserModal');toast('Usuário salvo ✓');}
+async function deleteUser(){if(!confirm('Remover usuário?'))return;await window.delUserDB(window._editingUserId);closeModal('newUserModal');toast('Removido');}
+
+// CADÊNCIA
+function renderCadencia(){
+  document.getElementById('cadTimeline').innerHTML=[
+    {n:'1',label:'Dia 1',actions:[{cls:'li',icon:'ti-brand-linkedin',txt:'Visitar perfil'},{cls:'li',icon:'ti-user-plus',txt:'Conexão LinkedIn'},{cls:'em',icon:'ti-mail',txt:'E-mail'}],active:true},
+    {n:'2',label:'Dia 2',actions:[{cls:'wa',icon:'ti-brand-whatsapp',txt:'WhatsApp'}]},
+    {n:'4',label:'Dia 4',actions:[{cls:'wa',icon:'ti-brand-whatsapp',txt:'Follow-up leve'},{cls:'li',icon:'ti-message',txt:'Comentário LinkedIn'}]},
+    {n:'6',label:'Dia 6',actions:[{cls:'em',icon:'ti-mail',txt:'Nova tentativa'},{cls:'wa',icon:'ti-brand-whatsapp',txt:'WhatsApp'}]},
+    {n:'10',label:'Dia 10',actions:[{cls:'',icon:'ti-door-exit',txt:'Encerramento elegante'}]},
+  ].map(d=>`<div class="cad-day"><div class="cad-dot${d.active?' active-day':''}">${d.n}</div><div class="cad-body"><div class="cad-label">${d.label}</div><div class="cad-actions">${d.actions.map(a=>`<span class="cad-action ${a.cls}"><i class="ti ${a.icon}"></i> ${a.txt}</span>`).join('')}</div></div></div>`).join('');
+}
+
+// AGENTES
+function renderAgentes(){
+  document.getElementById('agentsGrid').innerHTML=[
+    {name:'Hunter Agent',icon:'ti-radar',color:'rgba(55,138,221,.15)',color2:'var(--info)',status:'on'},
+    {name:'Enrichment',icon:'ti-database',color:'rgba(212,160,51,.15)',color2:'var(--gold)',status:'on'},
+    {name:'Copy Agent',icon:'ti-sparkles',color:'rgba(123,94,167,.15)',color2:'var(--ai2)',status:'on'},
+    {name:'SDR Agent',icon:'ti-message-chatbot',color:'rgba(29,158,117,.15)',color2:'var(--success)',status:'running'},
+    {name:'Scheduler',icon:'ti-calendar-event',color:'rgba(224,96,48,.15)',color2:'var(--orange)',status:'on'},
+  ].map(a=>`<div class="agent-card${a.status==='running'?' running':''}"><div class="agent-icon" style="background:${a.color}"><i class="ti ${a.icon}" style="color:${a.color2}"></i></div><div class="agent-name">${a.name}</div><div class="agent-status${a.status==='running'?' running':''}">${a.status==='running'?'Executando':'Ativo'}</div></div>`).join('');
+  document.getElementById('agentLog').innerHTML=[
+    {type:'hunt',icon:'ti-radar',text:'Hunter Agent — 12 novas imobiliárias em Porto Alegre',time:'há 2m'},
+    {type:'enrich',icon:'ti-database',text:'Enrichment Agent — Score calculado para 8 leads (média 74)',time:'há 8m'},
+    {type:'msg',icon:'ti-sparkles',text:'Copy Agent — Abordagem gerada para Vance Imóveis via WhatsApp',time:'há 15m'},
+    {type:'move',icon:'ti-arrows-right',text:'SDR Agent — Imobiliária Alpha movido para Engajado',time:'há 22m'},
+  ].map(f=>`<div class="ai-feed-item"><div class="ai-feed-icon ${f.type}"><i class="ti ${f.icon}"></i></div><div class="ai-feed-text">${f.text}</div><div class="ai-feed-time">${f.time}</div></div>`).join('');
+}
+
+// PROSPECÇÃO
+async function buscarImobiliarias(){
+  const cidadeInput=document.getElementById('pCidade').value.trim()||'Porto Alegre, RS';
+  const partes=cidadeInput.split(',');
+  const cidade=partes[0].trim();
+  const estado=partes[1]?partes[1].trim():'';
+  const porte=document.getElementById('pPorte').value;
+  const sinal=document.getElementById('pSinal').value;
+
+  document.getElementById('prospResults').innerHTML=`<div style="text-align:center;padding:32px;color:var(--text3)"><div class="spinner" style="margin:0 auto 12px"></div><div style="font-size:13px">Buscando imobiliárias em ${cidadeInput}...</div></div>`;
+
+  const prompt=`Gere exatamente 6 imobiliárias fictícias mas com nomes e dados realistas do mercado imobiliário brasileiro, localizadas especificamente na cidade de ${cidade}${estado?' no estado de '+estado:''}.${porte?' Porte: '+porte+'.':''}${sinal?' Sinal de crescimento: '+sinal+'.':''}
+
+Retorne APENAS este objeto JSON, sem nenhum texto antes ou depois:
+{"leads":[{"nome":"Nome Imobiliária","cidade":"${cidadeInput}","porte":"Pequena","score":72,"instagram":"@nomeimobiliaria","site":"www.nomeimobiliaria.com.br","decisor":"Nome Decisor","cargo":"Diretor Comercial","telefone":"(47) 99999-9999","sinais":["Instagram ativo","Equipe crescendo"],"imoveis_estimados":"40-60","fundado":"2015"}]}
+
+Regras:
+- Exatamente 6 imobiliárias no array "leads"
+- Nomes realistas do mercado imobiliário da região
+- Score entre 50 e 95
+- Telefones com DDD correto para a região
+- JSON puro e válido, sem comentários`;
+
+  try{
+    const txt=await callAI(prompt, true);
+    // Limpeza robusta do JSON
+    let clean=txt.trim();
+    clean=clean.replace(/```json/gi,'').replace(/```/g,'').trim();
+    // Extrai o JSON mesmo se vier com texto ao redor
+    const match=clean.match(/\{[\s\S]*\}/);
+    if(!match)throw new Error('JSON não encontrado na resposta');
+    const parsed=JSON.parse(match[0]);
+    _prospLeads=parsed.leads||[];
+    if(!_prospLeads.length)throw new Error('Nenhum lead retornado');
+    renderProspResults();
+  }catch(e){
+    console.error('Erro prospecção:',e);
+    document.getElementById('prospResults').innerHTML=`<div style="text-align:center;padding:32px;color:#E24B4A;font-size:13px"><i class="ti ti-alert-circle" style="font-size:24px;display:block;margin-bottom:8px"></i>Erro ao buscar. Verifique se a IA Claude está selecionada e tente novamente.</div>`;
+  }
+}
+
+function renderProspResults(){
+  if(!_prospLeads.length)return;
+  document.getElementById('prospResults').innerHTML=`<div class="prosp-results">${_prospLeads.map((l,i)=>{
+    const sc=parseInt(l.score)||50,scCls=sc>=75?'score-hi':sc>=50?'score-md':'score-lo';
+    return`<div class="prosp-lead" onclick="abrirPerfil(${i})"><div class="prosp-score ${scCls}">${sc}</div><div class="prosp-info"><div class="prosp-nome">${esc(l.nome)}</div><div class="prosp-meta">${esc(l.cidade)} · ${esc(l.porte||'—')} · ${esc(l.decisor||'—')}</div>${l.sinais?.length?`<div class="prosp-sinais">${l.sinais.map(s=>`<span class="sinal">${esc(s)}</span>`).join('')}</div>`:''}</div><button class="btn bsm btn-ai" onclick="adicionarProsp(${i},event)"><i class="ti ti-plus"></i> Pipeline</button></div>`;
+  }).join('')}</div>`;
+}
+
+function abrirPerfil(idx){
+  const l=_prospLeads[idx];_currentPerfil=l;
+  const sc=parseInt(l.score)||50;
+  document.getElementById('pmScoreCircle').className=`score-circle ${sc>=75?'score-hi-circle':'score-md-circle'}`;
+  document.getElementById('pmScoreCircle').textContent=sc;
+  document.getElementById('pmNome').textContent=l.nome;
+  document.getElementById('pmMeta').textContent=`${l.cidade} · ${l.porte||'—'} · Fundada ${l.fundado||'—'}`;
+  document.getElementById('pmBody').innerHTML=`
+    <div class="perfil-section"><h4><i class="ti ti-user"></i> Decisor</h4><div class="perfil-row"><span class="perfil-key">Nome</span><span class="perfil-val">${esc(l.decisor||'—')}</span></div><div class="perfil-row"><span class="perfil-key">Cargo</span><span class="perfil-val">${esc(l.cargo||'—')}</span></div><div class="perfil-row"><span class="perfil-key">Telefone</span><span class="perfil-val">${esc(l.telefone||'—')}</span></div></div>
+    <div class="perfil-section"><h4><i class="ti ti-world"></i> Digital</h4><div class="perfil-row"><span class="perfil-key">Instagram</span><span class="perfil-val">${esc(l.instagram||'—')}</span></div><div class="perfil-row"><span class="perfil-key">LinkedIn</span><span class="perfil-val">${esc(l.linkedin||'—')}</span></div><div class="perfil-row"><span class="perfil-key">Site</span><span class="perfil-val">${esc(l.site||'—')}</span></div></div>
+    <div class="perfil-section"><h4><i class="ti ti-chart-bar"></i> Dados</h4><div class="perfil-row"><span class="perfil-key">Imóveis est.</span><span class="perfil-val">${esc(l.imoveis_estimados||'—')}</span></div>${l.sinais?.length?`<div class="perfil-row"><span class="perfil-key">Sinais</span><span class="perfil-val">${l.sinais.join(', ')}</span></div>`:''}</div>`;
+  openModal('perfilModal');
+}
+
+async function adicionarProsp(idx,e){
+  if(e)e.stopPropagation();
+  const l=_prospLeads[idx]||_currentPerfil;if(!l)return;
+  await window.saveLead({id:gid(),nome:l.nome,cidade:l.cidade,seg:l.porte==='Grande'?'G':l.porte==='Média'?'M':'P',contato:l.decisor||'',fonte:'IA — Hunter Agent',followup:'',notas:`Decisor: ${l.decisor||'—'} | Tel: ${l.telefone||'—'} | IG: ${l.instagram||'—'}`,stage:'prospect',score:l.score||50});
+  closeModal('perfilModal');toast(`${l.nome} adicionado ✓`);
+}
+
+function adicionarAoPipeline(){adicionarProsp(null,null);}
+function limparProsp(){_prospLeads=[];document.getElementById('prospResults').innerHTML='<div style="text-align:center;padding:32px;color:var(--text3);font-size:13px"><i class="ti ti-radar" style="font-size:32px;display:block;margin-bottom:8px;opacity:.3"></i>Configure os critérios e clique em Buscar com IA</div>';}
+
+// COPY
+function buildCopyPrompt(nome,ctx,canal){return `Você é o Copy Agent da Evolua, especialista em prospecção B2B imobiliário brasileiro.\nCrie uma mensagem de primeiro contato para ${nome} via ${canal}.${ctx?'\nContexto: '+ctx:''}\nTiago Seltenreich é consultor de gestão imobiliária com +10 anos de experiência.\nMensagem humana, direta, profissional. Sem emojis excessivos.${canal==='e-mail'?'\nInclua linha "Assunto:" antes do corpo.':''}\nRetorne SOMENTE o texto da mensagem.`;}
+
+function selCh(btn,ch){document.querySelectorAll('#page-cadencia .ch-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');_copyChannel=ch;}
+function selChModal(btn,ch){document.querySelectorAll('#copyModal .ch-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');_copyChannelModal=ch;}
+
+async function gerarCopy(){
+  const nome=document.getElementById('copyNome').value.trim();if(!nome){alert('Informe o nome da imobiliária');return;}
+  const result=document.getElementById('copyResult'),box=document.getElementById('copyText');
+  result.style.display='block';box.innerHTML='<span class="ai-typing"></span>';
+  try{const txt=await callAI(buildCopyPrompt(nome,document.getElementById('copyCtx').value.trim(),_copyChannel));box.innerHTML=txt.replace(/\n/g,'<br>');}
+  catch(e){box.innerHTML='<span style="color:#E24B4A">Erro ao gerar. Tente novamente.</span>';}
+}
+
+function abrirCopyModal(){
+  const l=(window._leads||[]).find(x=>x.id===window._editingId);if(!l)return;
+  document.getElementById('copyModalNome').textContent=l.nome;
+  document.getElementById('copyModalCtx').value=l.notas||'';
+  document.getElementById('copyModalResult').style.display='none';
+  closeModal('editModal');openModal('copyModal');
+}
+
+function openCopyDirect(id,e){e.stopPropagation();window._editingId=id;abrirCopyModal();}
+
+async function gerarCopyModal(){
+  const nome=document.getElementById('copyModalNome').textContent,box=document.getElementById('copyModalText');
+  document.getElementById('copyModalResult').style.display='block';box.innerHTML='<span class="ai-typing"></span>';
+  try{const txt=await callAI(buildCopyPrompt(nome,document.getElementById('copyModalCtx').value.trim(),_copyChannelModal));box.innerHTML=txt.replace(/\n/g,'<br>');}
+  catch(e){box.innerHTML='<span style="color:#E24B4A">Erro ao gerar.</span>';}
+}
+
+function copiarTexto(){navigator.clipboard.writeText(document.getElementById('copyText').innerText).then(()=>toast('Copiado ✓'));}
+function copiarTextoModal(){navigator.clipboard.writeText(document.getElementById('copyModalText').innerText).then(()=>toast('Copiado ✓'));}
+
+// =============================================
+// QUALIFICAÇÃO IA
+// =============================================
+function renderQualificacao(){
+  const leads=(window._leads||[]).filter(l=>l.stage==='prospect'||l.stage==='contato');
+  const el=document.getElementById('qualificacaoContent');
+  if(!el)return;
+  el.innerHTML=`
+  <div style="margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--text)">Qualificação de Leads</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px">IA busca decisor, e-mail e telefone automaticamente</div>
+    </div>
+    <button class="btn btn-ai" onclick="qualificarTodos()"><i class="ti ti-sparkles"></i> Qualificar todos pendentes</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px" id="qualLista">
+    ${leads.length?leads.map(l=>{
+      const qualif=l.qualificado;
+      return`<div class="dash-card" style="padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="flex:1">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--text)">${esc(l.nome)}</div>
+            <div style="font-size:11px;color:var(--text3)">${esc(l.cidade||'—')} · ${esc(l.fonte||'—')}</div>
+            ${qualif?`<div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap">
+              ${l.nomeContato?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-user" style="font-size:10px"></i> ${esc(l.nomeContato)}</span>`:''}
+              ${l.contato?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-phone" style="font-size:10px"></i> ${esc(l.contato)}</span>`:''}
+              ${l.email?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-mail" style="font-size:10px"></i> ${esc(l.email)}</span>`:''}
+              ${l.instagram?`<span style="font-size:11px;color:var(--ai2)"><i class="ti ti-brand-instagram" style="font-size:10px"></i> ${esc(l.instagram)}</span>`:''}
+            </div>`:''}
+          </div>
+          <div style="display:flex;gap:6px;align-items:center">
+            ${qualif?`<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(29,158,117,.15);color:var(--success);border:1px solid rgba(29,158,117,.25)">Qualificado</span>`:''}
+            <button class="btn bsm btn-ai" onclick="qualificarLead('${l.id}',this)"><i class="ti ti-sparkles"></i> ${qualif?'Reatualizar':'Qualificar'}</button>
+            <button class="btn bsm" onclick="openEdit('${l.id}')"><i class="ti ti-pencil"></i></button>
+          </div>
+        </div>
+        <div id="qual_result_${l.id}" style="display:none;margin-top:10px;padding:10px;background:var(--navy3);border-radius:var(--r);font-size:12px;color:var(--text2);line-height:1.6"></div>
+      </div>`;
+    }).join(''):`<div class="placeholder"><i class="ti ti-user-check"></i><h3>Nenhum lead para qualificar</h3><p>Adicione prospects no pipeline primeiro.</p></div>`}
+  </div>`;
+}
+
+async function qualificarLead(id, btn){
+  const l=(window._leads||[]).find(x=>x.id===id);
+  if(!l)return;
+  const resultEl=document.getElementById('qual_result_'+id);
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="ai-typing"></span>';}
+  if(resultEl){resultEl.style.display='block';resultEl.innerHTML='<span class="ai-typing"></span> Buscando informações...';}
+
+  const prompt=`Você é um especialista em pesquisa B2B no mercado imobiliário brasileiro.
+Pesquise e retorne informações sobre a imobiliária "${l.nome}" localizada em ${l.cidade||'Brasil'}.
+Site: ${l.site||'não informado'}. Instagram: ${l.instagram||'não informado'}.
+
+Retorne APENAS JSON válido:
+{"nomeContato":"Nome do decisor/dono/diretor","cargo":"Cargo","telefone":"(XX) XXXXX-XXXX","email":"email@imobiliaria.com.br","linkedin":"linkedin.com/in/...","sinais":["sinal1","sinal2"],"resumo":"2 frases sobre a empresa","fonte":"Como você encontrou essas informações"}
+
+Se não encontrar algum dado, use string vazia. Seja realista — se não tiver certeza, indique que é estimado.`;
+
+  try{
+    const txt=await callAI(prompt,true);
+    const clean=txt.replace(/```json|```/g,'').trim();
+    const match=clean.match(/\{[\s\S]*\}/);
+    if(!match)throw new Error('JSON inválido');
+    const data=JSON.parse(match[0]);
+
+    // Atualiza o lead com os dados encontrados
+    if(data.nomeContato)l.nomeContato=data.nomeContato;
+    if(data.cargo)l.cargo=data.cargo;
+    if(data.telefone&&!l.contato)l.contato=data.telefone;
+    if(data.email&&!l.email)l.email=data.email;
+    if(data.linkedin)l.linkedin=data.linkedin;
+    if(data.sinais&&data.sinais.length)l.sinaisQual=data.sinais;
+    l.qualificado=true;
+    l.qualificadoEm=new Date().toLocaleDateString('pt-BR');
+    await window.saveLead(l);
+
+    if(resultEl){
+      resultEl.innerHTML=`
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          ${data.nomeContato?`<div><span style="color:var(--text3)">Decisor:</span> <strong style="color:var(--text)">${esc(data.nomeContato)}</strong>${data.cargo?` · ${esc(data.cargo)}`:''}</div>`:''}
+          ${data.telefone?`<div><span style="color:var(--text3)">Telefone:</span> <strong style="color:var(--text)">${esc(data.telefone)}</strong></div>`:''}
+          ${data.email?`<div><span style="color:var(--text3)">E-mail:</span> <strong style="color:var(--text)">${esc(data.email)}</strong></div>`:''}
+          ${data.linkedin?`<div><span style="color:var(--text3)">LinkedIn:</span> <strong style="color:var(--ai2)">${esc(data.linkedin)}</strong></div>`:''}
+        </div>
+        ${data.resumo?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);color:var(--text3);font-style:italic">${esc(data.resumo)}</div>`:''}
+        ${data.sinais&&data.sinais.length?`<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">${data.sinais.map(s=>`<span style="font-size:10px;padding:1px 6px;border-radius:4px;background:rgba(55,138,221,.1);color:var(--info);border:1px solid rgba(55,138,221,.15)">${esc(s)}</span>`).join('')}</div>`:''}
+        <div style="margin-top:4px;font-size:10px;color:var(--text3)">Fonte: ${esc(data.fonte||'IA')}</div>`;
+    }
+    toast(`${l.nome} qualificado ✓`);
+  }catch(e){
+    if(resultEl)resultEl.innerHTML=`<span style="color:#E24B4A">Erro ao qualificar. Tente novamente.</span>`;
+  }finally{
+    if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> Reatualizar';}
+  }
+}
+
+async function qualificarTodos(){
+  const leads=(window._leads||[]).filter(l=>!l.qualificado&&(l.stage==='prospect'||l.stage==='contato'));
+  if(!leads.length){toast('Nenhum lead pendente');return;}
+  toast(`Qualificando ${leads.length} leads...`);
+  for(const l of leads.slice(0,5)){// máx 5 por vez para não estourar timeout
+    await qualificarLead(l.id,null);
+    await new Promise(r=>setTimeout(r,1000));// espera 1s entre chamadas
+  }
+  toast('Qualificação concluída ✓');
+}
+
+// =============================================
+// CADÊNCIA AUTOMÁTICA
+// =============================================
 const CADENCIA_PADRAO=[
-  {dia:1,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'Oi {nome}, tudo bem? Sou o Tiago Seltenreich, consultor de gestão para imobiliárias. Pergunta rápida: quantos imóveis você tem parados na carteira hoje sem alugar?\n\nSe quiser bater um papo rápido sobre isso, é só falar.',ativo:true},
-  {dia:3,canal:'email',fase:'Despertar',assunto:'Imóvel parado é dinheiro que você já perdeu',msg:'{nome},\n\nToda imobiliária tem aquele imóvel que tá na carteira faz 3, 4 meses e não aluga. O problema quase nunca é o imóvel. É o processo de visita que tá quebrado.\n\nVocê sabe quantas visitas sua equipe faz por semana? E quantas viram contrato?\n\nAté mais,\nTiago Seltenreich',ativo:true},
-  {dia:6,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'{nome}, te mandei um e-mail sobre visitas que não viram contrato. A maioria das imobiliárias perde entre 60% e 70% dos interessados nessa etapa.\n\nIsso acontece aí também?\n\nDá uma olhada: {site}',ativo:true},
-  {dia:10,canal:'email',fase:'Despertar',assunto:'Checklist gratuito: por que seu imóvel não está alugando',msg:'{nome},\n\nPreparei um checklist direto para identificar por que os imóveis travam na carteira.\n\nSe quiser receber, é só responder esse e-mail.\n\nTiago',ativo:true},
-  {dia:15,canal:'whatsapp',fase:'Despertar',assunto:'',msg:'{nome}, desocupação é um dos maiores pesadelos de quem trabalha com locação.\n\nVocê tem um processo definido para isso?\n\nVamos tomar um café virtual que eu te conto como outras imobiliárias resolveram isso.',ativo:true},
-  {dia:21,canal:'email',fase:'Despertar',assunto:'Inadimplência: o problema que ninguém quer ver',msg:'{nome},\n\nTrabalhei na Guarida Imóveis por anos. Lá acionávamos o inquilino no dia 3 de atraso. Não no dia 30.\n\nQuer saber como montar isso? Me responde ou acessa {site}.\n\nTiago',ativo:true},
-  {dia:28,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:'{nome}, pergunta direta: quando um proprietário liga reclamando, sua equipe tem resposta na hora?\n\nVamos tomar um café que eu te falo como resolver isso.',ativo:true},
-  {dia:35,canal:'email',fase:'Amadurecimento',assunto:'Diagnóstico gratuito — 3 vagas este mês',msg:'{nome},\n\nTodo mês abro 3 vagas para diagnóstico gratuito de 30 minutos com gestores de imobiliária.\n\nSem apresentação. Só análise.\n\nQuer uma vaga? Me responde.\n\nTiago\n{site}',ativo:true},
-  {dia:60,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:'{nome}, faz dois meses que a gente tem esse contato.\n\nMe dá 30 minutos essa semana? Sem apresentação. Só análise.\n\nVamos tomar um café? ☕',ativo:true},
+  {dia:1,canal:'whatsapp',fase:'Despertar',assunto:'',msg:`Oi {nome}, tudo bem? Sou o Tiago Seltenreich, consultor de gestão para imobiliárias. Pergunta rápida: quantos imóveis você tem parados na carteira hoje sem alugar?\n\nSe quiser bater um papo rápido sobre isso, é só falar. 😊`,ativo:true},
+  {dia:3,canal:'email',fase:'Despertar',assunto:'Imóvel parado é dinheiro que você já perdeu',msg:`{nome},\n\nToda imobiliária tem aquele imóvel que tá na carteira faz 3, 4 meses e não aluga. O proprietário liga toda semana. Você não sabe o que responder.\n\nO problema quase nunca é o imóvel. É o processo de visita que tá quebrado.\n\nVisita mal agendada, lead mal qualificado, proposta que demora 2 dias para sair — e o inquilino fecha com a imobiliária da esquina.\n\nVocê sabe quantas visitas sua equipe faz por semana? E quantas viram contrato?\n\nAté mais,\nTiago Seltenreich\nConsultor de gestão para imobiliárias`,ativo:true},
+  {dia:6,canal:'whatsapp',fase:'Despertar',assunto:'',msg:`{nome}, te mandei um e-mail semana passada sobre visitas que não viram contrato. A maioria das imobiliárias que atendo perde entre 60% e 70% dos interessados nessa etapa.\n\nIsso acontece aí também?\n\nSe quiser, posso te mostrar como resolver isso. Dá uma olhada no nosso site: {site}`,ativo:true},
+  {dia:10,canal:'email',fase:'Despertar',assunto:'Checklist gratuito: por que seu imóvel não está alugando',msg:`{nome},\n\nPreparei um checklist direto que uso nas imobiliárias que atendo para identificar por que os imóveis travam na carteira.\n\nSão 12 pontos. A maioria descobre que o problema está em 2 ou 3 deles.\n\nSe quiser receber, é só responder esse e-mail.\n\nTiago`,ativo:true},
+  {dia:15,canal:'whatsapp',fase:'Despertar',assunto:'',msg:`{nome}, desocupação é um dos maiores pesadelos de quem trabalha com locação. Vistoria mal feita, prazo estourado, proprietário na jugular.\n\nVocê tem um processo definido para isso ou vai resolvendo conforme aparece?\n\nVamos tomar um café virtual que eu te conto como outras imobiliárias resolveram isso. 😉`,ativo:true},
+  {dia:21,canal:'email',fase:'Despertar',assunto:'Inadimplência: o problema que ninguém quer ver antes de virar grande',msg:`{nome},\n\nInquilino atrasando é rotina em qualquer imobiliária. O que separa quem controla de quem se afoga nisso é simples: processo de cobrança que funciona antes de virar dívida.\n\nA maioria das imobiliárias começa a cobrar quando já tá em 60 dias de atraso. Aí é tarde.\n\nTrabalhei na Guarida Imóveis por anos. Lá a gente tinha protocolo para acionar o inquilino no dia 3 de atraso. Não no dia 30.\n\nA diferença no índice de inadimplência era brutal.\n\nQuer saber como montar isso na sua operação? Me responde esse e-mail ou acessa {site}.\n\nTiago`,ativo:true},
+  {dia:28,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:`{nome}, pergunta direta: quando um proprietário liga reclamando que o aluguel não caiu, sua equipe tem resposta na hora ou precisa correr atrás do financeiro?\n\nEsse tipo de situação toma quanto tempo do seu dia?\n\nVamos tomar um café que eu te falo como resolver isso de vez.`,ativo:true},
+  {dia:35,canal:'email',fase:'Amadurecimento',assunto:'Diagnóstico gratuito — 3 vagas este mês',msg:`{nome},\n\nTodo mês abro 3 vagas para fazer um diagnóstico gratuito de 30 minutos com gestores de imobiliária.\n\nA gente olha junto: carteira parada, processo de visita, desocupação e inadimplência.\n\nSem apresentação. Sem proposta no final. Só análise.\n\nQuer uma vaga? Me responde esse e-mail.\n\nTiago\nVeja mais em: {site}`,ativo:true},
+  {dia:42,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:`{nome}, essa semana finalizei o trabalho com uma imobiliária em SC. Eles tinham 23 imóveis parados. Em 6 semanas, 14 foram alugados.\n\nO que mudou foi o processo de qualificação do interessado antes da visita. Simples assim.\n\nPosso te mostrar como funciona? Dá uma olhada: {site}`,ativo:true},
+  {dia:50,canal:'email',fase:'Amadurecimento',assunto:'Quanto custa uma desocupação mal feita na sua imobiliária?',msg:`{nome},\n\nFiz a conta com uma imobiliária que atendi recentemente:\n\n— Vistoria de saída feita errado: proprietário exigiu reforma que não era responsabilidade do inquilino\n— Processo demorou 4 meses para resolver\n— Imóvel ficou 4 meses sem alugar\n— Prejuízo total: R$ 14.800\n\nTudo por falta de um checklist de desocupação.\n\nVocê tem esse processo mapeado hoje?\n\nTiago`,ativo:true},
+  {dia:60,canal:'whatsapp',fase:'Amadurecimento',assunto:'',msg:`{nome}, faz dois meses que a gente tem esse contato.\n\nQuero ser direto: pelo que sei sobre o mercado de locação, acho que dá para alugar mais e ter menos problema operacional na sua imobiliária.\n\nMe dá 30 minutos essa semana? Sem apresentação. Só análise.\n\nVamos tomar um café? ☕`,ativo:true},
 ];
+
+window._cadencias=[];
+window._editingCadenciaId=null;
+window._editingMsgIdx=null;
+
+function renderCadenciauto(){
+  const el=document.getElementById('cadenciautoContent');
+  if(!el)return;
+
+  // Carrega cadências do Firebase ou usa padrão
+  const cads=window._cadencias||[];
+
+  el.innerHTML=`
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--text)">Cadência Automática</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px">Configure sequências de WhatsApp e e-mail para seus prospects</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn bsm" onclick="openNovaCadencia()"><i class="ti ti-plus"></i> Nova cadência</button>
+    </div>
+  </div>
+
+  <!-- CADÊNCIA EVOLUA (PADRÃO) -->
+  <div class="dash-card" style="margin-bottom:12px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--text)">Cadência Evolua <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(29,158,117,.15);color:var(--success);border:1px solid rgba(29,158,117,.25);margin-left:6px">Ativa</span></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">60 dias · ${CADENCIA_PADRAO.length} toques · WhatsApp + E-mail intercalados</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn bsm" onclick="verLeadsCadencia()"><i class="ti ti-users"></i> Ver leads (${(window._leads||[]).filter(l=>l.cadenciaAtiva).length})</button>
+        <button class="btn bsm btn-gold" onclick="ativarCadenciaParaLeads()"><i class="ti ti-player-play"></i> Ativar para prospects</button>
+      </div>
+    </div>
+
+    <!-- TIMELINE DAS MENSAGENS -->
+    <div style="display:flex;flex-direction:column;gap:0">
+      ${CADENCIA_PADRAO.map((m,i)=>`
+      <div style="display:flex;gap:12px;position:relative">
+        ${i<CADENCIA_PADRAO.length-1?`<div style="position:absolute;left:15px;top:32px;width:1px;height:calc(100% - 8px);background:var(--border)"></div>`:''}
+        <div style="width:31px;height:31px;border-radius:50%;border:2px solid ${m.canal==='whatsapp'?'rgba(37,211,102,.4)':'rgba(212,160,51,.4)'};background:${m.canal==='whatsapp'?'rgba(37,211,102,.08)':'rgba(212,160,51,.08)'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:6px;position:relative;z-index:1">
+          <i class="ti ${m.canal==='whatsapp'?'ti-brand-whatsapp':'ti-mail'}" style="font-size:13px;color:${m.canal==='whatsapp'?'#25D366':'var(--gold)'}"></i>
+        </div>
+        <div style="flex:1;padding:6px 0 16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text)">Dia ${m.dia}</span>
+            <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:${m.fase==='Despertar'?'rgba(55,138,221,.1)':'rgba(224,96,48,.1)'};color:${m.fase==='Despertar'?'var(--info)':'var(--orange)'};">${m.fase}</span>
+            <span style="font-size:10px;color:var(--text3);text-transform:uppercase">${m.canal==='whatsapp'?'WhatsApp':'E-mail'}</span>
+          </div>
+          ${m.assunto?`<div style="font-size:11px;color:var(--text2);margin-bottom:3px"><strong>Assunto:</strong> ${esc(m.assunto)}</div>`:''}
+          <div style="font-size:11px;color:var(--text3);background:var(--navy3);padding:8px 10px;border-radius:6px;border:1px solid var(--border);max-height:60px;overflow:hidden;cursor:pointer;white-space:pre-line" onclick="editarMensagem(${i})">${esc(m.msg.substring(0,120))}${m.msg.length>120?'...':''}</div>
+          <div style="margin-top:5px;display:flex;gap:5px">
+            <button class="btn bsm" onclick="editarMensagem(${i})"><i class="ti ti-pencil"></i> Editar</button>
+            <button class="btn bsm btn-ai" onclick="gerarMensagemIA(${i})"><i class="ti ti-sparkles"></i> Gerar com IA</button>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- CONFIGURAÇÕES DE ENVIO -->
+  <div class="dash-card">
+    <h3><i class="ti ti-settings" style="color:var(--gold)"></i> Configurações de Envio</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px"><i class="ti ti-brand-whatsapp" style="color:#25D366"></i> WhatsApp (Z-API)</div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Status: <span id="zapStatus" style="color:${window._config?.zapKey?'var(--success)':'#E24B4A'}">${window._config?.zapKey?'Conectado':'Não configurado'}</span></div>
+        <button class="btn bsm" onclick="nav('config',document.querySelector('[onclick*=\"config\"]'))"><i class="ti ti-settings"></i> Configurar</button>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:8px"><i class="ti ti-mail" style="color:var(--gold)"></i> E-mail (Brevo)</div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Status: <span id="brevoStatus" style="color:${window._config?.brevoKey?'var(--success)':'#E24B4A'}">${window._config?.brevoKey?'Conectado':'Não configurado'}</span></div>
+        <button class="btn bsm" onclick="nav('config',document.querySelector('[onclick*=\"config\"]'))"><i class="ti ti-settings"></i> Configurar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function editarMensagem(idx){
+  const m=CADENCIA_PADRAO[idx];
+  window._editingMsgIdx=idx;
+  document.getElementById('editMsgDia').textContent=`Dia ${m.dia} — ${m.canal==='whatsapp'?'WhatsApp':'E-mail'}`;
+  document.getElementById('editMsgAssunto').value=m.assunto||'';
+  document.getElementById('editMsgAssuntoRow').style.display=m.canal==='email'?'block':'none';
+  document.getElementById('editMsgTexto').value=m.msg;
+  openModal('editMsgModal');
+}
+
+function salvarMensagem(){
+  const idx=window._editingMsgIdx;
+  if(idx===null||idx===undefined)return;
+  CADENCIA_PADRAO[idx].assunto=document.getElementById('editMsgAssunto').value;
+  CADENCIA_PADRAO[idx].msg=document.getElementById('editMsgTexto').value;
+  closeModal('editMsgModal');
+  toast('Mensagem salva ✓');
+  renderCadenciauto();
+}
+
+async function gerarMensagemIA(idx){
+  const m=CADENCIA_PADRAO[idx];
+  window._editingMsgIdx=idx;
+  document.getElementById('editMsgDia').textContent=`Dia ${m.dia} — ${m.canal==='whatsapp'?'WhatsApp':'E-mail'}`;
+  document.getElementById('editMsgAssunto').value=m.assunto||'';
+  document.getElementById('editMsgAssuntoRow').style.display=m.canal==='email'?'block':'none';
+  document.getElementById('editMsgTexto').value='Gerando com IA...';
+  openModal('editMsgModal');
+
+  const prompt=`Você é Tiago Seltenreich, consultor de gestão para imobiliárias brasileiras.
+Escreva uma mensagem de ${m.canal==='whatsapp'?'WhatsApp':'e-mail'} para o Dia ${m.dia} da cadência de prospecção.
+Fase: ${m.fase}. Tom: direto, sem firula, português claro.
+Dores reais: imóveis parados, desocupação, inadimplência, proprietário cobrando, processo de visita quebrado.
+${m.canal==='email'?'Inclua linha "Assunto: ..." no início.':'Mensagem curta, parece conversa real, não marketing.'}
+Use {nome} para o nome do prospect e {site} para o link do site.
+CTA: "vamos tomar um café" (conversa) ou "dá uma olhada no site: {site}" (validação).
+Retorne APENAS o texto da mensagem, sem explicações.`;
+
+  try{
+    const txt=await callAI(prompt);
+    document.getElementById('editMsgTexto').value=txt.trim();
+  }catch(e){
+    document.getElementById('editMsgTexto').value=m.msg;
+    toast('Erro ao gerar. Usando texto original.');
+  }
+}
+
+async function ativarCadenciaParaLeads(){
+  const leads=(window._leads||[]).filter(l=>l.stage==='prospect'&&!l.cadenciaAtiva);
+  if(!leads.length){toast('Nenhum prospect sem cadência ativa');return;}
+  if(!confirm(`Ativar cadência para ${leads.length} prospects?`))return;
+  for(const l of leads){
+    l.cadenciaAtiva=true;
+    l.cadenciaInicio=new Date().toISOString().split('T')[0];
+    l.cadenciaDiaAtual=0;
+    await window.saveLead(l);
+  }
+  toast(`Cadência ativada para ${leads.length} prospects ✓`);
+  renderCadenciauto();
+}
+
+function verLeadsCadencia(){
+  const leads=(window._leads||[]).filter(l=>l.cadenciaAtiva);
+  // Navega para o pipeline filtrado
+  nav('pipeline',document.querySelector('[onclick*="pipeline"]'));
+  toast(`${leads.length} leads com cadência ativa`);
+}
+
+// =============================================
+// CONFIGURAÇÕES
+// =============================================
+window._config={zapKey:'',zapInstance:'',brevoKey:'',brevoSender:'',site:'tiagoseltenreich.com.br',whatsappTiago:''};
+
+function renderConfig(){
+  const el=document.getElementById('configContent');
+  if(!el)return;
+  const c=window._config;
+  el.innerHTML=`
+  <div style="max-width:600px">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px">Configurações</div>
+
+    <!-- Z-API -->
+    <div class="dash-card" style="margin-bottom:12px">
+      <h3><i class="ti ti-brand-whatsapp" style="color:#25D366"></i> WhatsApp — Z-API</h3>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:12px">Conecte sua conta Z-API para envio automático de WhatsApp. Plano a partir de R$90/mês em z-api.io</div>
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Instance ID</label>
+      <input id="cfgZapInstance" type="text" value="${esc(c.zapInstance)}" placeholder="Ex: 3D5AXXXXXXXXXX" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:8px">
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Token</label>
+      <input id="cfgZapKey" type="password" value="${esc(c.zapKey)}" placeholder="Seu token Z-API" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:8px">
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Seu WhatsApp (com DDD)</label>
+      <input id="cfgWhatsapp" type="text" value="${esc(c.whatsappTiago)}" placeholder="Ex: 51999999999" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif">
+    </div>
+
+    <!-- BREVO -->
+    <div class="dash-card" style="margin-bottom:12px">
+      <h3><i class="ti ti-mail" style="color:var(--gold)"></i> E-mail — Brevo</h3>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:12px">Brevo é gratuito até 300 e-mails/dia. Crie conta em brevo.com e gere sua API Key.</div>
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">API Key Brevo</label>
+      <input id="cfgBrevoKey" type="password" value="${esc(c.brevoKey)}" placeholder="xkeysib-..." style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:8px">
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">E-mail remetente</label>
+      <input id="cfgBrevoSender" type="text" value="${esc(c.brevoSender)}" placeholder="tiago@tiagoseltenreich.com.br" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif">
+    </div>
+
+    <!-- GERAL -->
+    <div class="dash-card" style="margin-bottom:12px">
+      <h3><i class="ti ti-world" style="color:var(--info)"></i> Configurações Gerais</h3>
+      <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">Site (usado nos CTAs)</label>
+      <input id="cfgSite" type="text" value="${esc(c.site)}" placeholder="tiagoseltenreich.com.br" style="width:100%;padding:8px 10px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif">
+    </div>
+
+    <button class="btn btn-gold" onclick="salvarConfig()" style="width:100%"><i class="ti ti-device-floppy"></i> Salvar configurações</button>
+
+    <!-- TESTE -->
+    <div class="dash-card" style="margin-top:12px">
+      <h3><i class="ti ti-test-pipe" style="color:var(--ai2)"></i> Testar envio</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Número de teste (com DDD, sem +55)</div>
+          <input id="testeWaNum" type="text" placeholder="51999999999" style="width:100%;padding:7px 9px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:6px">
+          <button class="btn bsm" onclick="testarWhatsApp()" style="width:100%"><i class="ti ti-brand-whatsapp"></i> Testar WhatsApp</button>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:6px">E-mail de teste</div>
+          <input id="testeEmail" type="text" placeholder="teste@email.com" style="width:100%;padding:7px 9px;background:var(--navy3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:13px;font-family:'Barlow',sans-serif;margin-bottom:6px">
+          <button class="btn bsm" onclick="testarEmail()" style="width:100%"><i class="ti ti-mail"></i> Testar E-mail</button>
+        </div>
+      </div>
+      <div id="testeResult" style="display:none;margin-top:8px;padding:8px;border-radius:var(--r);font-size:12px"></div>
+    </div>
+  </div>`;
+}
+
+function salvarConfig(){
+  window._config={
+    zapInstance:document.getElementById('cfgZapInstance').value.trim(),
+    zapKey:document.getElementById('cfgZapKey').value.trim(),
+    whatsappTiago:document.getElementById('cfgWhatsapp').value.trim(),
+    brevoKey:document.getElementById('cfgBrevoKey').value.trim(),
+    brevoSender:document.getElementById('cfgBrevoSender').value.trim(),
+    site:document.getElementById('cfgSite').value.trim()||'tiagoseltenreich.com.br',
+  };
+  // Salva no Firebase
+  window.saveUserDB({id:'config_evolua',type:'config',...window._config});
+  toast('Configurações salvas ✓');
+}
+
+async function enviarWhatsApp(numero,mensagem){
+  const c=window._config;
+  if(!c.zapKey||!c.zapInstance)throw new Error('Z-API não configurada');
+  const num=numero.replace(/\D/g,'');
+  const res=await fetch(`https://api.z-api.io/instances/${c.zapInstance}/token/${c.zapKey}/send-text`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({phone:num,message:mensagem})
+  });
+  const data=await res.json();
+  if(!res.ok)throw new Error(data.message||'Erro Z-API');
+  return data;
+}
+
+async function enviarEmail(para,assunto,corpo){
+  const c=window._config;
+  if(!c.brevoKey)throw new Error('Brevo não configurado');
+  const res=await fetch('https://api.brevo.com/v3/smtp/email',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','api-key':c.brevoKey},
+    body:JSON.stringify({
+      sender:{name:'Tiago Seltenreich',email:c.brevoSender||'contato@tiagoseltenreich.com.br'},
+      to:[{email:para}],
+      subject:assunto,
+      textContent:corpo
+    })
+  });
+  const data=await res.json();
+  if(!res.ok)throw new Error(data.message||'Erro Brevo');
+  return data;
+}
+
+async function testarWhatsApp(){
+  const num=document.getElementById('testeWaNum').value.trim();
+  if(!num){toast('Informe o número');return;}
+  const res=document.getElementById('testeResult');
+  res.style.display='block';res.style.background='var(--navy3)';res.textContent='Enviando...';
+  try{
+    await enviarWhatsApp(num,'Olá! Teste de envio automático do sistema Evolua. ✅');
+    res.style.background='rgba(29,158,117,.1)';res.textContent='✅ WhatsApp enviado com sucesso!';
+  }catch(e){
+    res.style.background='rgba(224,96,48,.1)';res.textContent='❌ Erro: '+e.message;
+  }
+}
+
+async function testarEmail(){
+  const email=document.getElementById('testeEmail').value.trim();
+  if(!email){toast('Informe o e-mail');return;}
+  const res=document.getElementById('testeResult');
+  res.style.display='block';res.style.background='var(--navy3)';res.textContent='Enviando...';
+  try{
+    await enviarEmail(email,'Teste — Sistema Evolua','Olá!\n\nEste é um teste de envio automático do sistema Evolua.\n\nTiago Seltenreich');
+    res.style.background='rgba(29,158,117,.1)';res.textContent='✅ E-mail enviado com sucesso!';
+  }catch(e){
+    res.style.background='rgba(224,96,48,.1)';res.textContent='❌ Erro: '+e.message;
+  }
+}
 
 function aplicarVariaveis(texto,lead){
   const site=window._config?.site||'tiagoseltenreich.com.br';
@@ -813,6 +1518,34 @@ function aplicarVariaveis(texto,lead){
     .replace(/\{cidade\}/g,lead.cidade||'')
     .replace(/\{site\}/g,site);
 }
+
+async function dispararCadenciaLead(leadId){
+  const l=(window._leads||[]).find(x=>x.id===leadId);
+  if(!l||!l.cadenciaAtiva)return;
+  const hoje=new Date();
+  const inicio=new Date(l.cadenciaInicio);
+  const diasPassados=Math.floor((hoje-inicio)/(1000*60*60*24));
+  const proximaMensagem=CADENCIA_PADRAO.find(m=>m.dia>=(l.cadenciaDiaAtual||0)&&m.dia<=diasPassados&&m.ativo);
+  if(!proximaMensagem)return;
+
+  const texto=aplicarVariaveis(proximaMensagem.msg,l);
+
+  try{
+    if(proximaMensagem.canal==='whatsapp'&&l.contato){
+      await enviarWhatsApp(l.contato,texto);
+    } else if(proximaMensagem.canal==='email'&&l.email){
+      await enviarEmail(l.email,aplicarVariaveis(proximaMensagem.assunto,l),texto);
+    }
+    l.cadenciaDiaAtual=proximaMensagem.dia+1;
+    l.ultimoEnvio=new Date().toISOString();
+    await window.saveLead(l);
+    toast(`Mensagem enviada para ${l.nome} ✓`);
+  }catch(e){
+    toast(`Erro ao enviar para ${l.nome}: ${e.message}`);
+  }
+}
+
+function openNovaCadencia(){toast('Em breve: criar cadências personalizadas');}
 
 </script>
 </body>
